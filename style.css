@@ -7,27 +7,28 @@
 body {
 	background-color: #28223F;
 	font-family: Montserrat, sans-serif;
-	
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-
 	min-height: 100vh;
 	margin: 0;
 }
 
 h3 {
 	margin: 10px 0;
+  color: white;
 }
 
 h6 {
 	margin: 5px 0;
 	text-transform: uppercase;
+  font-size: 20px;
 }
 
 p {
-	font-size: 14px;
+	font-size: 18px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	line-height: 21px;
 }
 
@@ -98,24 +99,26 @@ button.primary.ghost {
 	padding: 7px;
     
 }
+
 .a:hover{
-    background-color: rgb(96, 199, 255);  
+    background-color: rgb(250, 113, 220);  
 } 
 
 footer {
     background-color: #222;
     color: #fff;
-    font-size: 14px;
+
     bottom: 0;
     position: fixed;
     left: 0;
     right: 0;
     text-align: center;
-    z-index: 999;
+    z-index: 999; 
+
 }
 
 footer p {
-    margin: 10px 0;
+    margin: 1px;
 }
 
 footer i {
@@ -141,17 +144,17 @@ button.primary:hover{
     margin: 5px 2px;
     /* box-shadow: 0px 0px 32px -7px #00199f; */
   }
-  a{
-	text-decoration: none
-  }
   .social-margin {
     margin-right: 15px;
   }
   
   a,
   a:hover,
-  a:focus,
-  a:active {
+  a:link,
+  a:active,
+  a:focus
+  {
+    color: white;
     text-decoration: none;
   }
   
@@ -178,15 +181,15 @@ button.primary:hover{
   .facebook {
     font-size: 20px;
     padding-top: 5px;
-    border-color: #3b5998;
-    background-color: #3b5998;
+    background-color: #3B5998;
     color: #ffffff;
+    border-color: #3B5998;
   
   }
   
   .facebook:hover {
     background-color: #ffffff;
-    color: #3b5998;
+    color: #3B5998;
   }
   
   .youtube {
@@ -216,4 +219,41 @@ button.primary:hover{
     background-color: #ffffff;
     color: #5865f2;
   }
-
+  .tiktok {
+    font-size: 20px;
+    padding-top: 5px;
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #000000;
+  
+  }
+  
+  .tiktok:hover {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  .github {
+    font-size: 20px;
+    padding-top: 5px;
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #000000;
+  
+  }
+  
+  .github:hover {
+    background-color: #ffffff;
+    color: #000000;
+  }
+.p1{
+  border: 1px solid #2D2747;
+	border-radius: 2px;
+	display: inline-block;
+	font-size: 12px;
+	margin: 0 7px 7px 0;
+	padding: 7px;
+  color: white;
+}
+.p1:hover{
+  background-color: rgb(247, 115, 225);
+}
