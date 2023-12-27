@@ -113,7 +113,15 @@ end)
 spawn(function()
     pcall(function()
         while wait(.2) do
-            if (FetchData("Rank") == 1 and GetZones_Num() < 4) or (FetchData("Rank") == 2 and GetZones_Num() < 16) or (FetchData("Rank") == 4 and GetZones_Num() < 24) then
+            if FetchData("Rank") == 5 and FetchData("Rebirths") == 0 then
+                    local args = {
+                        [1] = "1"
+                    }
+
+                    game:GetService("ReplicatedStorage").Network.Rebirth_Request:InvokeServer(unpack(args))
+
+            end
+            if (FetchData("Rank") == 1 and GetZones_Num() < 4) or (FetchData("Rank") == 2 and GetZones_Num() < 16) or (FetchData("Rank") == 4 and GetZones_Num() < 24) or (FetchData("Rank") == 5 and GetZones_Num() < 25) then
                 _G.Task = "Zone"
 
                     local args = {
