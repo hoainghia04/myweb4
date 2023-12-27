@@ -11,7 +11,6 @@ function FetchData(name)
     return Data:GetSaves()[game.Players.LocalPlayer][name]
 end 
 
-
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(215.1314697265625, 28.358858108520508, -656.6474609375)
 wait(1)
 
@@ -232,21 +231,7 @@ while _G.AutoRankUp do task.wait()
         if _G.Task == "RankUp" then
   
             for i,v in pairs(FetchData("Goals")) do
-
                 if v.Type == 14 then
-                    table.foreach(FetchData("Inventory")["Potion"],  function(i,v)
-                        if v._am >= 5 then
-
-                            local args = {
-                                [1] = tostring(i),
-                                [2] = 1
-                            }
-
-                            game:GetService("ReplicatedStorage").Network.UpgradePotionsMachine_Activate:InvokeServer(unpack(args))
-
-                        end
-                    end)
-
                     if FetchData("VendingStocks").PotionVendingMachine1 > 0 then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(792.7941284179688, 19.308185577392578, 504.1685791015625)
                         local args = {
@@ -257,24 +242,7 @@ while _G.AutoRankUp do task.wait()
                         game:GetService("ReplicatedStorage").Network.VendingMachines_Purchase:InvokeServer(unpack(args))
                         break
                     end
-            
-
-
                 elseif v.Type == 15 then
-                    table.foreach(FetchData("Inventory")["Enchant"],  function(i,v)
-                        if v._am >= 5 then
-
-                            local args = {
-                                [1] = v.id,
-                                [2] = v.tn or 1,
-                                [3] = 1
-                            }
-
-                            game:GetService("ReplicatedStorage").Network.UpgradeEnchantsMachine_Activate:InvokeServer(unpack(args))
-
-                        end
-                    end)
-                    
                     if FetchData("VendingStocks").EnchantVendingMachine1 > 0 then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(367.94183349609375, 29.352033615112305, 94.59992218017578)
                         local args = {
@@ -283,7 +251,7 @@ while _G.AutoRankUp do task.wait()
                         }
 
                         game:GetService("ReplicatedStorage").Network.VendingMachines_Purchase:InvokeServer(unpack(args))
-                        
+                        break
                     end
                 elseif v.Type == 34 then
                     table.foreach(FetchData("Inventory")["Potion"] , function(ii,vv)
