@@ -232,6 +232,7 @@ while _G.AutoRankUp do task.wait()
         if _G.Task == "RankUp" then
   
             for i,v in pairs(FetchData("Goals")) do
+
                 if v.Type == 14 then
                     table.foreach(FetchData("Inventory")["Potion"],  function(i,v)
                         if v._am >= 5 then
@@ -256,20 +257,7 @@ while _G.AutoRankUp do task.wait()
                         game:GetService("ReplicatedStorage").Network.VendingMachines_Purchase:InvokeServer(unpack(args))
                         break
                     end
-                elseif v.Type == 37 then
-                    Last_Zone = GetLastZone()
-
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
-
-                    table.foreach(FetchData("Inventory")["Misc"] , function(i,v)
-                        if v.id == "Basic Coin Jar" then
-                        local args = {
-                            [1] = tostring(i)
-                        }
-
-                        game:GetService("ReplicatedStorage").Network.CoinJar_Spawn:InvokeServer(unpack(args))
-                    end
-                        end)
+            
 
 
                 elseif v.Type == 15 then
@@ -295,7 +283,7 @@ while _G.AutoRankUp do task.wait()
                         }
 
                         game:GetService("ReplicatedStorage").Network.VendingMachines_Purchase:InvokeServer(unpack(args))
-                        break
+                        
                     end
                 elseif v.Type == 34 then
                     table.foreach(FetchData("Inventory")["Potion"] , function(ii,vv)
