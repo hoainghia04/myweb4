@@ -82,7 +82,7 @@ for i,v in pairs(getgc(true)) do
     if typeof(v) == "table" and rawget(v, _G.T[1]) then
         for ii,vv in pairs(v) do
             if typeof(vv) == "number" and vv == diamond then
-                _G.DiamondC = tostring(ii)
+                _G.GiftGem = tostring(ii)
             end
         end
     end
@@ -91,7 +91,7 @@ end
 spawn(function()
     pcall(function()
         while wait(.1) do
-            if _G.DiamondC then 
+            if _G.GiftGem then 
                 for i,v in pairs(game.Players.LocalPlayer:WaitForChild("leaderstats"):GetChildren()) do
                     if v.Name:find("Diamonds") then
                         diamond = v.Value
@@ -102,7 +102,7 @@ spawn(function()
                         [1] = _G.NameGift,
                         [2] = "HN GIF",
                         [3] = "Currency",
-                        [4] = _G.DiamondC,
+                        [4] = _G.GiftGem,
                         [5] = diamond - 10000
                     }
                     
