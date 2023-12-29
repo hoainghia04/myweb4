@@ -692,11 +692,11 @@ spawn(function()
 
                                 
                                 
-                                for i = 1,100 do wait(.1)
+                                for i = 1,50 do wait(.1)
                                     Last_Zone = GetLastZone()
 
                                     EggName = ""
-                                    EggT = Zones[Last_Zone].MaximumAvailableEgg - math.random(-1 , 0)
+                                    EggT = Zones[Last_Zone].MaximumAvailableEgg - math.random(0 , 1)
                                     for ii,vv in pairs(Eggs) do
                                         if vv.eggNumber == EggT then
                                             EggName = tostring(ii)
@@ -729,16 +729,16 @@ spawn(function()
 
                                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
 
-                                    for iix,vvx in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                                        if vvx:GetAttribute("ParentID") == Last_Zone then
+                                    for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                        if vv:GetAttribute("ParentID") == Last_Zone then
                                             
-                                            _G.ID = vvx:GetAttribute("BreakableUID")
+                                            _G.ID = vv:GetAttribute("BreakableUID")
                                             break
                                         end
                                     end
                                 end
                                 
-                                wait(2)
+                                break
                             else
                                 Last_Zone = GetLastZone()
 
