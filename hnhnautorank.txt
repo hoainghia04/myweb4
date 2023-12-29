@@ -696,7 +696,7 @@ spawn(function()
                                     Last_Zone = GetLastZone()
 
                                     EggName = ""
-                                    EggT = Zones[Last_Zone].MaximumAvailableEgg - math.random(-1 , 1)
+                                    EggT = Zones[Last_Zone].MaximumAvailableEgg - math.random(-1 , 0)
                                     for ii,vv in pairs(Eggs) do
                                         if vv.eggNumber == EggT then
                                             EggName = tostring(ii)
