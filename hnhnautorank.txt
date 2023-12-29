@@ -705,7 +705,7 @@ spawn(function()
                                     spawn(function()
                                         for iii,vvv in pairs(workspace.__THINGS.Eggs.Main:GetChildren()) do
                                             if tonumber(string.match(vvv.Name , "%d+")) == Zones[Last_Zone].MaximumAvailableEgg then
-                                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Center.CFrame
+                                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vvv.Center.CFrame
                                             end
                                         end
                                     
