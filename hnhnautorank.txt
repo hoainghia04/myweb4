@@ -429,7 +429,7 @@ while _G.AutoRankUp do task.wait()
                     havecoinjar = nil
 
                     for ii,vv in pairs(FetchData("Inventory").Misc) do
-                        if vv.id == "Coin Jar" then
+                        if vv.id:find("Coin Jar") then
                             havecoinjar = true
 
                             local args = {
@@ -475,8 +475,8 @@ while _G.AutoRankUp do task.wait()
                     havecoinjar = nil
 
                     for ii,vv in pairs(FetchData("Inventory").Misc) do
-                        if vv.id == "Coin Jar" then
-                            
+                        if vv.id:find("Coin Jar") then
+                        
                             havecoinjar = true
 
                             local args = {
