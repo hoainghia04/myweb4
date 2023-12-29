@@ -56,6 +56,15 @@ function GetZones_Num()
     return a
 end
 
+function GetRandomZone()
+    List = {}
+    for i,v in pairs(Zones) do
+        if Match_Zone(tostring(i)) then
+            table.insert(List , tostring(i))
+        end
+    end
+    return List[math.random(1 , #List)]
+end
 
 
 
@@ -359,6 +368,22 @@ spawn(function()
                                     
                                 end
                                 break
+                            elseif v.Type == 33 then
+                        
+                                for ii,vv in pairs(FetchData("Inventory").Misc) do
+                                    if vv.id:find("Flag") then
+                                            Last_Zone = GetRandomZone()
+                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+                                            wait(.1)
+                                            local args = {
+                                                [1] =  vv.id,
+                                                [2] = tostring(ii)
+                                            }
+                                            game:GetService("ReplicatedStorage").Network:FindFirstChild("Flags: Consume"):InvokeServer(unpack(args))
+                                
+                                        break
+                                    end
+                                end          
                             elseif v.Type == 21 then
                             
                                 Last_Zone = GetLastZone()
