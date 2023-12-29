@@ -267,39 +267,29 @@ while _G.AutoRankUp do task.wait()
   
             for i,v in pairs(FetchData("Goals")) do
                 if v.Type == 14 then
-                    table.foreach(FetchData("Inventory")["Potion"],  function(i,v)
-                        if v._am >= 5 then
-
-                            local args = {
-                                [1] = tostring(i),
-                                [2] = 1
-                            }
-
-                            game:GetService("ReplicatedStorage").Network.UpgradePotionsMachine_Activate:InvokeServer(unpack(args))
-
-                        end
-                    end)
 
                     if FetchData("VendingStocks").PotionVendingMachine1 > 0 then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(913.2861938476562, 28.859811782836914, -10.250344276428223)
+                        
                         local args = {
                             [1] = "PotionVendingMachine1",
                             [2] = 1
                         }
 
                         game:GetService("ReplicatedStorage").Network.VendingMachines_Purchase:InvokeServer(unpack(args))
-                        break
+                        
                     end
                 elseif v.Type == 15 then
                     if FetchData("VendingStocks").EnchantVendingMachine1 > 0 then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(367.94183349609375, 29.352033615112305, 94.59992218017578)
+                        
                         local args = {
                             [1] = "EnchantVendingMachine1",
                             [2] = 1
                         }
 
                         game:GetService("ReplicatedStorage").Network.VendingMachines_Purchase:InvokeServer(unpack(args))
-                        break
+                        
                     end
                 elseif v.Type == 34 then
                     table.foreach(FetchData("Inventory")["Potion"] , function(ii,vv)
@@ -670,7 +660,6 @@ while _G.AutoRankUp do task.wait()
                 elseif v.Type == 3 or v.Type == 20 then
                 
 
-                    
                     
                     for i = 1,100 do wait()
                         Last_Zone = GetLastZone()
