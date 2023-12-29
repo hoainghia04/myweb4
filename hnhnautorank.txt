@@ -122,7 +122,7 @@ spawn(function()
                     game:GetService("ReplicatedStorage").Network.Rebirth_Request:InvokeServer(unpack(args))
 
             end
-            if (FetchData("Rank") == 1 and GetZones_Num() < 4) or (FetchData("Rank") == 2 and GetZones_Num() < 16) or (FetchData("Rank") == 4 and GetZones_Num() < 24) or (FetchData("Rank") == 5 and GetZones_Num() < 25) then
+            if (FetchData("Rank") == 1 and GetZones_Num() < 4) or (FetchData("Rank") == 2 and GetZones_Num() < 10) or (FetchData("Rank") == 4 and GetZones_Num() < 16) or (FetchData("Rank") == 4 and GetZones_Num() < 24) or (FetchData("Rank") == 5 and GetZones_Num() < 25) then
                 _G.Task = "Zone"
 
                     local args = {
@@ -374,72 +374,34 @@ while _G.AutoRankUp do task.wait()
                     end
                     break
                 elseif v.Type == 1 then
+                    
                     if v.BreakableType then
                         if v.BreakableType == "Present" then
-                            Last_Zone = "Cherry Blossom"
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+                            Last_Zone = GetZoneName_ByNum(6)
                     
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+                            
                             for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
                                     
                                 if vv:GetAttribute("ParentID") == Last_Zone then
-        
+                                    
                                     _G.ID = vv:GetAttribute("BreakableUID")
                                     break
                                 
                                 end
                             end
+                            break
                         elseif v.BreakableType == "Safe" then
+                            
+
                             D = nil
                         
-                                table.foreach(Zones , function(i,v)
-                                    if v.Breakables.Main then
-                                        table.foreach(v.Breakables.Main.Data , function(ii,vv)
-                                            if string.find(vv.Type , "Safe") then
-                                                Last_Zone = tostring(i)
-
-                                                if Match_Zone(Last_Zone) then
-                                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
-                                                end
-                                            end
-                                        end)
-                                    end
-                                end)
-
-                            for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                                    
-                                if Match_Zone(vv:GetAttribute("ParentID")) and string.find(tostring(vv:GetAttribute("BreakableID")) , "Safe") then
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vv:GetPivot()
-
-                                    _G.ID = vv:GetAttribute("BreakableUID")
-                                    D = true
-                                    break
-                                    
-                                end
-                            end
-                            
-                            if D then
-                                break
-                            end
-
-                            Last_Zone = Last_Zone()
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
-                    
-                            for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                                    
-                                if vv:GetAttribute("ParentID") == Last_Zone then
-        
-                                    _G.ID = vv:GetAttribute("BreakableUID")
-                                    break
-                                
-                                end
-                            end
-                        else
                             table.foreach(Zones , function(i,v)
                                 if v.Breakables.Main then
                                     table.foreach(v.Breakables.Main.Data , function(ii,vv)
-                                        if string.find(vv.Type , "Coins") then
+                                        if string.find(vv.Type , "Safe") then
                                             Last_Zone = tostring(i)
-    
+
                                             if Match_Zone(Last_Zone) then
                                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
                                             end
@@ -447,43 +409,70 @@ while _G.AutoRankUp do task.wait()
                                     end)
                                 end
                             end)
-    
-                            for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                                if Match_Zone(vv:GetAttribute("ParentID")) and string.find(tostring(vv:GetAttribute("BreakableID")) , "Coins") then
-                                    
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vv:GetPivot()
-    
-                                    _G.ID = vv:GetAttribute("BreakableUID")
-                                    break
-                                end
-                            end
-                        end
-                    else
-                        table.foreach(Zones , function(i,v)
-                            if v.Breakables.Main then
-                                table.foreach(v.Breakables.Main.Data , function(ii,vv)
-                                    if string.find(vv.Type , "Coins") then
-                                        Last_Zone = tostring(i)
 
-                                        if Match_Zone(Last_Zone) then
-                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
-                                        end
-                                    end
-                                end)
-                            end
-                        end)
-                        
                         for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                            if Match_Zone(vv:GetAttribute("ParentID")) and string.find(tostring(vv:GetAttribute("BreakableID")) , "Coins") then
                                 
+                            if Match_Zone(vv:GetAttribute("ParentID")) and string.find(tostring(vv:GetAttribute("BreakableID")) , "Safe") then
                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vv:GetPivot()
 
                                 _G.ID = vv:GetAttribute("BreakableUID")
+                                D = true
                                 break
+                                
                             end
                         end
-                    end
+                        
+                        if D then
+                            break
+                        end
 
+                            
+                            Last_Zone = GetZoneName_ByNum(16)
+                    
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+                            
+                            for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                    
+                                if vv:GetAttribute("ParentID") == Last_Zone then
+                                    
+                                    _G.ID = vv:GetAttribute("BreakableUID")
+                                    break
+                                
+                                end
+                            end
+                            break
+                        else
+                            Last_Zone = GetLastZone()
+                    
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+                            
+                            for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                    
+                                if vv:GetAttribute("ParentID") == Last_Zone then
+                                    
+                                    _G.ID = vv:GetAttribute("BreakableUID")
+                                    break
+                                
+                                end
+                            end
+                            break
+                        end
+                    else
+                        Last_Zone = GetLastZone()
+                    
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+                        
+                        for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                
+                            if vv:GetAttribute("ParentID") == Last_Zone then
+                                
+                                _G.ID = vv:GetAttribute("BreakableUID")
+                                break
+                            
+                            end
+                        end
+                        break
+                    end
                     
                 elseif v.Type == 3 or v.Type == 20 then
                 
