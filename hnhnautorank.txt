@@ -722,6 +722,21 @@ spawn(function()
                                 end
                                 
                                 wait(2)
+                            else
+                                Last_Zone = GetLastZone()
+            
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+            
+                                    for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                                    
+                                        if vv:GetAttribute("ParentID") == Last_Zone then
+                                            
+                                        _G.ID = vv:GetAttribute("BreakableUID")
+                                        break
+                                        
+                                    end
+                                end
+                                    
                             end
 
                             if v.Type == 3 or v.Type == 20 then
