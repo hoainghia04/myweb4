@@ -275,7 +275,7 @@ spawn(function()
                     game:GetService("ReplicatedStorage").Network.ToyBall_Consume:InvokeServer()
 
                 end
-            end          
+            end      
         end
     end)
 end)
@@ -341,7 +341,7 @@ spawn(function()
                                         game:GetService("ReplicatedStorage").Network:FindFirstChild("Potions: Consume"):FireServer(unpack(args))
 
                                     end
-                                end)
+                                end
                             elseif v.Type == 35 then
                                 for ii,vv in pairs(FetchData("Inventory")["Fruit"]) do
                                     local args = {
