@@ -337,6 +337,19 @@ while _G.AutoRankUp do task.wait()
                         game:GetService("ReplicatedStorage").Network:FindFirstChild("Fruits: Consume"):FireServer(unpack(args))
 
                     end)
+
+                elseif v.Type == 9 then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(214.5154571533203, 27.293315887451172, -586.52490234375)
+
+                        for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                            if vv:GetAttribute("VIPBreakable") and vv:GetAttribute("VIPBreakable") == true then
+                                
+                                _G.ID = vv:GetAttribute("BreakableUID")
+                                break
+                            end
+                        end
+
+                    break
                 elseif v.Type == 6 then
                     local args = {
                         [1] = GetZoneName_ByNum(GetZones_Num() + 1)
@@ -395,19 +408,6 @@ while _G.AutoRankUp do task.wait()
                             break
                         
                         end
-                    end
-                    break
-                elseif v.Type == 9 then
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(214.5154571533203, 27.293315887451172, -586.52490234375)
-
-                    for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                        if vv:GetAttribute("VIPBreakable") and vv:GetAttribute("VIPBreakable") == true then
-                       
-                            _G.ID = vv:GetAttribute("BreakableUID")
-                            break
-                        end
-
-                        
                     end
                     break
                 elseif v.Type == 21 then
@@ -600,7 +600,6 @@ while _G.AutoRankUp do task.wait()
                             break
                         elseif v.BreakableType == "Safe" then
                             
-
                             D = nil
                         
                             table.foreach(Zones , function(i,v)
