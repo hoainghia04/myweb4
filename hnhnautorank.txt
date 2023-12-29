@@ -256,6 +256,15 @@ spawn(function()
         end
     end)
 end)
+spawn(function()
+    pcall(function()
+        while wait(2) do
+game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, true, game, 1)
+                                        wait(.1)
+                                        game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, false, game, 1)
+        end
+    end)
+end)
 
 spawn(function()
     pcall(function()
@@ -721,7 +730,7 @@ spawn(function()
                                     end)
                                 end
                                 
-                                wait(2)
+                                break
                             else
                                 Last_Zone = GetLastZone()
             
