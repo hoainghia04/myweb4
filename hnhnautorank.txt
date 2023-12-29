@@ -83,7 +83,7 @@ function GUI()
 	Frame.BackgroundColor3 = Color3.fromRGB(53, 53, 53)
 	Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	Frame.BorderSizePixel = 0
-    Frame.BackgroundTransparency = 0.8
+    Frame.BackgroundTransparency = 0
 	Frame.Position = UDim2.new(0.178394452, 0, 0.113924049, 0)
 	Frame.Size = UDim2.new(0.643211126, 0, 0.132911399, 0)
 
@@ -96,7 +96,7 @@ function GUI()
 	TextLabel.Size = UDim2.new(0.795069337, 0, 0.59523803, 0)
 	TextLabel.Font = Enum.Font.SourceSans
 	TextLabel.Text = "Doing Quest Task : 10"
-	TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel.TextColor3 = Color3.fromRGB(53, 53, 53)
 	TextLabel.TextScaled = true
 	TextLabel.TextSize = 14.000
 	TextLabel.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
