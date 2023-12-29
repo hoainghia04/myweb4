@@ -262,6 +262,21 @@ spawn(function()
                                     game:GetService("ReplicatedStorage").Network.VendingMachines_Purchase:InvokeServer(unpack(args))
                                     break
                                 end
+                            elseif v.Type == 8 then
+                                Last_Zone = GetLastZone()
+                            
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+                                
+                                for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                        
+                                    if vv:GetAttribute("ParentID") == Last_Zone then
+                                        
+                                        _G.ID = vv:GetAttribute("BreakableUID")
+                                        break
+                                    
+                                    end
+                                end
+                                break
                             elseif v.Type == 15 then
                                 if FetchData("VendingStocks").EnchantVendingMachine1 > 0 then
                                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(367.94183349609375, 29.352033615112305, 94.59992218017578)
@@ -340,21 +355,7 @@ spawn(function()
                                     end
                                 end
                                 break
-                            elseif v.Type == 8 then
-                                Last_Zone = GetLastZone()
                             
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
-                                
-                                for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                                        
-                                    if vv:GetAttribute("ParentID") == Last_Zone then
-                                        
-                                        _G.ID = vv:GetAttribute("BreakableUID")
-                                        break
-                                    
-                                    end
-                                end
-                                break
                             elseif v.Type == 9 then
                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(214.5154571533203, 27.293315887451172, -586.52490234375)
 
