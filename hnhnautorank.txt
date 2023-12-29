@@ -261,7 +261,7 @@ end)
 spawn(function()
     pcall(function()
         while wait(.2) do
-            table.foreach(FetchData("Inventory")["Misc"] , function(i,v)
+            for i,v in pairs(FetchData("Inventory")["Misc"]) do
                 if v.id == "Gift Bag" then
 
                     local args = {
@@ -275,7 +275,7 @@ spawn(function()
                     game:GetService("ReplicatedStorage").Network.ToyBall_Consume:InvokeServer()
 
                 end
-            end)            
+            end          
         end
     end)
 end)
@@ -331,7 +331,7 @@ spawn(function()
                                     break
                                 end
                             elseif v.Type == 34 then
-                                table.foreach(FetchData("Inventory")["Potion"] , function(ii,vv)
+                                for ii,vv in pairs(FetchData("Inventory")["Potion"]) do
                                     if vv.tn == v.PotionTier then
 
                                         local args = {
@@ -341,17 +341,17 @@ spawn(function()
                                         game:GetService("ReplicatedStorage").Network:FindFirstChild("Potions: Consume"):FireServer(unpack(args))
 
                                     end
-                                end) 
+                                end)
                             elseif v.Type == 35 then
-                                table.foreach(FetchData("Inventory")["Fruit"] , function(i,v)
+                                for ii,vv in pairs(FetchData("Inventory")["Fruit"]) do
                                     local args = {
-                                        [1] = tostring(i),
+                                        [1] = tostring(ii),
                                         [2] = 1
                                     }
 
                                     game:GetService("ReplicatedStorage").Network:FindFirstChild("Fruits: Consume"):FireServer(unpack(args))
 
-                                end)
+                                end
                             elseif v.Type == 6 then
                                 local args = {
                                     [1] = GetZoneName_ByNum(GetZones_Num() + 1)
