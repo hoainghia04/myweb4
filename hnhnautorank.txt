@@ -131,7 +131,7 @@ spawn(function()
                     game:GetService("ReplicatedStorage").Network.Rebirth_Request:InvokeServer(unpack(args))
 
             end
-            if (FetchData("Rank") == 1 and GetZones_Num() < 4) or (FetchData("Rank") == 2 and GetZones_Num() < 10) or (FetchData("Rank") == 4 and GetZones_Num() < 16) or (FetchData("Rank") == 4 and GetZones_Num() < 24) or (FetchData("Rank") == 5 and GetZones_Num() < 25) then
+            if (FetchData("Rank") == 1 and GetZones_Num() < 4) or (FetchData("Rank") == 2 and GetZones_Num() < 10) or (FetchData("Rank") == 4 and GetZones_Num() < 25) or (FetchData("Rank") == 5 and GetZones_Num() < 25) then
                 _G.Task = "Zone"
 
                     local args = {
