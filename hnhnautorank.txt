@@ -10,7 +10,7 @@ Eggs = require(game.ReplicatedStorage.Library.Directory.Eggs)
 function FetchData(name)
     return Data:GetSaves()[game.Players.LocalPlayer][name]
 end 
-table.foreach(FetchData("Goals"), function(i,v) table.foreach(v , print) end)
+
 
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(215.1314697265625, 28.358858108520508, -656.6474609375)
 wait(1)
@@ -41,6 +41,7 @@ function GetZones_Num()
     _ , a = GetLastZone()
     return a
 end
+Zones = require(game.ReplicatedStorage.Library.Directory.Zones)
 
 function Match_Zone(zone)
     for i,v in pairs(FetchData("UnlockedZones")) do
@@ -50,7 +51,15 @@ function Match_Zone(zone)
     end
     return false
 end
-
+function GetRandomZone()
+    List = {}
+    for i,v in pairs(Zones) do
+        if Match_Zone(tostring(i)) then
+            table.insert(List , tostring(i))
+        end
+    end
+    return List[math.random(1 , #List)]
+end
 function GetZones_Num()
     _ , a = GetLastZone()
     return a
@@ -234,6 +243,9 @@ spawn(function()
 end)
 
 _G.AutoRankUp = true
+for i,v in pairs(workspace.__THINGS.Flags:GetChildren()) do
+    table.foreach(v.Flag:GetAttributes() , print)
+end
 
 while _G.AutoRankUp do task.wait()
     pcall(function()
@@ -253,7 +265,7 @@ while _G.AutoRankUp do task.wait()
 
                         end
                     end)
-                    
+
                     if FetchData("VendingStocks").PotionVendingMachine1 > 0 then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(913.2861938476562, 28.859811782836914, -10.250344276428223)
                         local args = {
@@ -399,6 +411,128 @@ while _G.AutoRankUp do task.wait()
                         
                         end
                     end
+                    break
+                elseif v.Type == 31 then
+
+                    GoToZone("Spawn")
+
+                    for ii,vv in pairs(FetchData("Inventory").Misc) do
+                        if vv.id == "Coin Jar" then
+                            local args = {
+                                [1] = tostring(ii)
+                            }
+        
+                            game:GetService("ReplicatedStorage").Network.Comet_Spawn:InvokeServer(unpack(args))
+                        end
+                    end
+                    
+
+                    for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                    
+                        if vv:GetAttribute("ParentID") == "Spawn" then
+                            
+                            _G.ID = vv:GetAttribute("BreakableUID")
+                            break
+                        
+                        end
+                    end
+                    break
+                elseif v.Type == 37 then
+
+                    Last_Zone = GetLastZone()
+
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+
+                    for ii,vv in pairs(FetchData("Inventory").Misc) do
+                        if vv.id == "Coin Jar" then
+                            local args = {
+                                [1] = tostring(ii)
+                            }
+        
+                            game:GetService("ReplicatedStorage").Network.Comet_Spawn:InvokeServer(unpack(args))
+                        end
+                    end
+                    
+
+                    for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                    
+                        if vv:GetAttribute("ParentID") == Last_Zone then
+                            
+                            _G.ID = vv:GetAttribute("BreakableUID")
+                            break
+                        
+                        end
+                    end
+                    break
+                elseif v.Type == 32 then
+
+                    GoToZone("Spawn")
+
+                    for ii,vv in pairs(FetchData("Inventory").Misc) do
+                        if vv.id == "Comet" then
+                            local args = {
+                                [1] = tostring(ii)
+                            }
+        
+                            game:GetService("ReplicatedStorage").Network.Comet_Spawn:InvokeServer(unpack(args))
+                        end
+                    end
+                    
+
+                    for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                    
+                        if vv:GetAttribute("BreakableID") == "Comet" then
+                            
+                            _G.ID = vv:GetAttribute("BreakableUID")
+                            break
+                        
+                        end
+                    end
+                    break
+
+                elseif v.Type == 38 then
+                    GoToBestZone()
+                    
+                    for ii,vv in pairs(FetchData("Inventory").Misc) do
+                        if vv.id == "Comet" then
+                            local args = {
+                                [1] = tostring(ii)
+                            }
+        
+                            game:GetService("ReplicatedStorage").Network.Comet_Spawn:InvokeServer(unpack(args))
+                        end
+                    end
+                    
+
+                    for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                    
+                        if vv:GetAttribute("BreakableID") == "Comet" then
+                            
+                            _G.ID = vv:GetAttribute("BreakableUID")
+                            break
+                        
+                        end
+                    end
+                break
+                elseif v.Type == 33 then
+
+
+                    Last_Zone = GetRandomZone()
+
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+
+                    for ii,vv in pairs(FetchData("Inventory").Misc) do
+                        if vv.id:find("Flag") then
+                            local args = {
+                                [1] =   v.id,
+                                [2] = tostring(ii)
+                            }
+                            
+                            game:GetService("ReplicatedStorage").Network:FindFirstChild("Flags: Consume"):InvokeServer(unpack(args))
+                            break
+                        end
+                    end
+
                     break
                 elseif v.Type == 1 then
                     
