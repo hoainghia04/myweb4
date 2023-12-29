@@ -242,7 +242,7 @@ while _G.AutoRankUp do task.wait()
             for i,v in pairs(FetchData("Goals")) do
                 if v.Type == 14 then
                     if FetchData("VendingStocks").PotionVendingMachine1 > 0 then
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(792.7941284179688, 19.308185577392578, 504.1685791015625)
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(913.2861938476562, 28.859811782836914, -10.250344276428223)
                         local args = {
                             [1] = "PotionVendingMachine1",
                             [2] = 1
