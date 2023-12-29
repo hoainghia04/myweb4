@@ -696,31 +696,33 @@ spawn(function()
                                     Last_Zone = GetLastZone()
 
                                     EggName = ""
+                                    EggT = Zones[Last_Zone].MaximumAvailableEgg - math.random(-1 , 1)
                                     for ii,vv in pairs(Eggs) do
-                                        if vv.eggNumber == Zones[Last_Zone].MaximumAvailableEgg - math.random(-1 , 1) then
+                                        if vv.eggNumber == EggT then
                                             EggName = tostring(ii)
                                         end
                                     end
                                     
-                                    spawn(function()
-                                        for iii,vvv in pairs(workspace.__THINGS.Eggs.Main:GetChildren()) do
-                                            if tonumber(string.match(vvv.Name , "%d+")) == Zones[Last_Zone].MaximumAvailableEgg then
-                                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vvv.Center.CFrame
+                                        spawn(function()
+                                            for iii,vvv in pairs(workspace.__THINGS.Eggs.Main:GetChildren()) do
+                                                if tonumber(string.match(vvv.Name , "%d+")) == EggT then
+                                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vvv.Center.CFrame
+                                                end
                                             end
-                                        end
-                                    
-                                        local args = {
-                                            [1] = EggName,
-                                            [2] = FetchData("EggHatchCount")
-                                        }
                                         
-                                        game:GetService("ReplicatedStorage").Network.Eggs_RequestPurchase:InvokeServer(unpack(args))
+                                            local args = {
+                                                [1] = EggName,
+                                                [2] = FetchData("EggHatchCount")
+                                            }
+                                            
+                                            game:GetService("ReplicatedStorage").Network.Eggs_RequestPurchase:InvokeServer(unpack(args))
 
-                                        game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, true, game, 1)
-                                        wait(.1)
-                                        game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, false, game, 1)
-                                    end)
-                                end
+                                            game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, true, game, 1)
+                                            wait(.1)
+                                            game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, false, game, 1)
+                                        end)
+                                    end
+                                
 
                                 for i = 1,120 do wait(.1)
                                     Last_Zone = GetLastZone()
