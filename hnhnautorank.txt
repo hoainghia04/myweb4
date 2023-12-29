@@ -288,7 +288,7 @@ spawn(function()
                         _G.OPENEGG = "GO"
                     end
                 end
-            end
+            
         end
     end)
 end)
