@@ -68,6 +68,42 @@ end
 
 
 
+function GUI()
+	local GUI = Instance.new("ScreenGui")
+	local Frame = Instance.new("Frame")
+	local TextLabel = Instance.new("TextLabel")
+
+	--Properties:
+
+	GUI.Name = "GUI"
+	GUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	GUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	Frame.Parent = GUI
+	Frame.BackgroundColor3 = Color3.fromRGB(53, 53, 53)
+	Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Frame.BorderSizePixel = 0
+	Frame.Position = UDim2.new(0.178394452, 0, 0.113924049, 0)
+	Frame.Size = UDim2.new(0.643211126, 0, 0.132911399, 0)
+
+	TextLabel.Parent = Frame
+	TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel.BackgroundTransparency = 1.000
+	TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TextLabel.BorderSizePixel = 0
+	TextLabel.Position = UDim2.new(0.101694912, 0, 0.202380955, 0)
+	TextLabel.Size = UDim2.new(0.795069337, 0, 0.59523803, 0)
+	TextLabel.Font = Enum.Font.SourceSans
+	TextLabel.Text = "Doing Quest Task : 10"
+	TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel.TextScaled = true
+	TextLabel.TextSize = 14.000
+	TextLabel.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+	TextLabel.TextWrapped = true
+	
+	return TextLabel.Text
+end
+
 --
 
 
@@ -129,10 +165,11 @@ spawn(function()
                     }
 
                     game:GetService("ReplicatedStorage").Network.Rebirth_Request:InvokeServer(unpack(args))
-
+                else
+                    _G.Task = "RankUp"
             end
             if (FetchData("Rank") == 1 and GetZones_Num() < 4) or (FetchData("Rank") == 2 and GetZones_Num() < 16) or (FetchData("Rank") == 4 and GetZones_Num() < 24) or (FetchData("Rank") == 5 and GetZones_Num() < 26) then
-                _G.Task = "Zone"
+                    _G.Task = "Zone"
 
                     local args = {
                         [1] = GetZoneName_ByNum(GetZones_Num() + 1)
@@ -244,6 +281,8 @@ end)
 
 _G.AutoRankUp = true
 
+local GUI = GUI()
+
 spawn(function()
     pcall(function()
         while wait() do
@@ -251,6 +290,7 @@ spawn(function()
                     if _G.Task == "RankUp" then
             
                         for i,v in pairs(FetchData("Goals")) do
+                            GUI.Text = "Do Quest Type : "..tostring(v.Type)
                             if v.Type == 14 then
                                 if FetchData("VendingStocks").PotionVendingMachine1 > 0 then
                                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(913.2861938476562, 28.859811782836914, -10.250344276428223)
@@ -262,6 +302,7 @@ spawn(function()
                                     game:GetService("ReplicatedStorage").Network.VendingMachines_Purchase:InvokeServer(unpack(args))
                                     break
                                 end
+                            
                             elseif v.Type == 8 then
                                 Last_Zone = GetLastZone()
                             
