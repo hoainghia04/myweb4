@@ -256,42 +256,6 @@ spawn(function()
         end
     end)
 end)
-spawn(function()
-    pcall(function()
-        while wait(2) do
-game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, true, game, 1)
-                                        wait(.1)
-                                        game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, false, game, 1)
-        end
-    end)
-end)
-spawn(function()
-    pcall(function()
-        while wait(.2) do
-            
-                if v.Type == 3 or v.Type == 20 then
-                    if _G.OPENEGG == false then
-                        _G.OPENEGG = true
-                        for i = 1 , 240 do wait()
-                            Last_Zone = GetLastZone()
-
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
-
-                            for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                                if vv:GetAttribute("ParentID") == Last_Zone then
-                                    
-                                    _G.ID = vv:GetAttribute("BreakableUID")
-                                    break
-                                end
-                            end
-                        end
-                        _G.OPENEGG = "GO"
-                    end
-                end
-            
-        end
-    end)
-end)
 
 spawn(function()
     pcall(function()
@@ -316,7 +280,7 @@ spawn(function()
 end)
 
 _G.AutoRankUp = true
-_G.OPENEGG = "Go"
+
 local GUI = GUI()
 
 spawn(function()
@@ -725,60 +689,68 @@ spawn(function()
                             elseif v.Type == 3 or v.Type == 20 then
                             
 
-                                if _G.OPENEGG == "Go" then
-                                    _G.OPENEGG = true
-                                    for i = 1,120 do wait()
-                                        Last_Zone = GetLastZone()
+                                
+                                
+                                for i = 1,100 do wait(.1)
+                                    Last_Zone = GetLastZone()
 
-                                        EggName = ""
-                                        for i,v in pairs(Eggs) do
-                                            if v.eggNumber == Zones[Last_Zone].MaximumAvailableEgg - math.random(-1 , 1) then
-                                                EggName = tostring(i)
+                                    EggName = ""
+                                    for i,v in pairs(Eggs) do
+                                        if v.eggNumber == Zones[Last_Zone].MaximumAvailableEgg - math.random(-1 , 1) then
+                                            EggName = tostring(i)
+                                        end
+                                    end
+                                    
+                                    spawn(function()
+                                        for i,v in pairs(workspace.__THINGS.Eggs.Main:GetChildren()) do
+                                            if tonumber(string.match(v.Name , "%d+")) == Zones[Last_Zone].MaximumAvailableEgg then
+                                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Center.CFrame
                                             end
                                         end
-                                        
-                                            for i,v in pairs(workspace.__THINGS.Eggs.Main:GetChildren()) do
-                                                if tonumber(string.match(v.Name , "%d+")) == Zones[Last_Zone].MaximumAvailableEgg then
-                                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Center.CFrame
-                                                end
-                                            end
-                                        
-                                            local args = {
-                                                [1] = EggName,
-                                                [2] = FetchData("EggHatchCount")
-                                            }
-                                            
-                                            game:GetService("ReplicatedStorage").Network.Eggs_RequestPurchase:InvokeServer(unpack(args))
-
-                                            game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, true, game, 1)
-                                            wait(.1)
-                                            game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, false, game, 1)
                                     
-                                    end
-                                    _G.OPENEGG = false
+                                        local args = {
+                                            [1] = EggName,
+                                            [2] = FetchData("EggHatchCount")
+                                        }
+                                        
+                                        game:GetService("ReplicatedStorage").Network.Eggs_RequestPurchase:InvokeServer(unpack(args))
+
+                                        game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, true, game, 1)
+                                        wait(.1)
+                                        game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, false, game, 1)
+                                    end)
                                 end
 
-                                break
-                            else
-                                Last_Zone = GetLastZone()
-            
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
-            
+                                for i = 1,120 do wait(.1)
+                                    Last_Zone = GetLastZone()
+
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+
                                     for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                                                    
                                         if vv:GetAttribute("ParentID") == Last_Zone then
                                             
-                                        _G.ID = vv:GetAttribute("BreakableUID")
-                                        break
-                                        
+                                            _G.ID = vv:GetAttribute("BreakableUID")
+                                            break
+                                        end
                                     end
                                 end
-                                    
+                                
+                                wait(2)
+                            else
+                                Last_Zone = GetLastZone()
+
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+
+                                    for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                        if vv:GetAttribute("ParentID") == Last_Zone then
+                                            
+                                            _G.ID = vv:GetAttribute("BreakableUID")
+                                            break
+                                        end
+                                    end
                             end
 
-                        
-
-
+                          
 
 
                         end
