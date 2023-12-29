@@ -290,7 +290,7 @@ spawn(function()
                     if _G.Task == "RankUp" then
             
                         for i,v in pairs(FetchData("Goals")) do
-                            game.CoreGui.GUI.Frame.TextLabel.Text = "Do Quest Type : "..tostring(v.Type)
+                            game.CoreGui.GUI.Frame.TextLabel.Text = "Do Quest Type ("..tostring(v.Type)..") : "..tostring(v.Stars).." Stars"
                             if v.Type == 14 then
                                 if FetchData("VendingStocks").PotionVendingMachine1 > 0 then
                                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(913.2861938476562, 28.859811782836914, -10.250344276428223)
