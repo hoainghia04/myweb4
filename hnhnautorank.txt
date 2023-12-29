@@ -495,11 +495,11 @@ while _G.AutoRankUp do task.wait()
 
                         EggName = ""
                         for i,v in pairs(Eggs) do
-                            if v.eggNumber == Zones[Last_Zone].MaximumAvailableEgg then
+                            if v.eggNumber == Zones[Last_Zone].MaximumAvailableEgg - math.random(-1 , 1) then
                                 EggName = tostring(i)
                             end
                         end
-                        
+           
                         spawn(function()
                             for i,v in pairs(workspace.__THINGS.Eggs.Main:GetChildren()) do
                                 if tonumber(string.match(v.Name , "%d+")) == Zones[Last_Zone].MaximumAvailableEgg then
