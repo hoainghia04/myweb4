@@ -436,7 +436,8 @@ while _G.AutoRankUp do task.wait()
                                 [1] = tostring(ii)
                             }
         
-                            game:GetService("ReplicatedStorage").Network.Comet_Spawn:InvokeServer(unpack(args))
+                            game:GetService("ReplicatedStorage").Network.CoinJar_Spawn:InvokeServer(unpack(args))
+
                         end
                     end
                     
@@ -483,7 +484,7 @@ while _G.AutoRankUp do task.wait()
                                 [1] = tostring(ii)
                             }
         
-                            game:GetService("ReplicatedStorage").Network.Comet_Spawn:InvokeServer(unpack(args))
+                            game:GetService("ReplicatedStorage").Network.CoinJar_Spawn:InvokeServer(unpack(args))
                         end
                     end
                     
