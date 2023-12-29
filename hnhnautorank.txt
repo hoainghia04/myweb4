@@ -691,7 +691,7 @@ spawn(function()
 
                                 
                                 
-                                for i = 1,100 do wait()
+                                for i = 1,120 do wait()
                                     Last_Zone = GetLastZone()
 
                                     EggName = ""
@@ -740,7 +740,7 @@ spawn(function()
                             end
 
                             if v.Type == 3 or v.Type == 20 then
-                                for i = 1 , 120 do wait()
+                                for i = 1 , 240 do wait()
                                     Last_Zone = GetLastZone()
 
                                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
