@@ -442,11 +442,12 @@ while _G.AutoRankUp do task.wait()
                     end
                     
                     if havecoinjar then
-                        GoToZone("Spawn")
+                        Zone = GetZoneName_ByNum(5)
+                        GoToZone(Zone)
 
                         for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
                                         
-                            if vv:GetAttribute("ParentID") == "Spawn" then
+                            if vv:GetAttribute("ParentID") == Zone then
                                 
                                 _G.ID = vv:GetAttribute("BreakableUID")
                                 break
@@ -508,8 +509,9 @@ while _G.AutoRankUp do task.wait()
                     end
                     
                     if havecomet then
-                        GoToZone("Spawn")
-
+                        Zone = GetZoneName_ByNum(5)
+                        GoToZone(Zone)
+        
                         for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
                                         
                             if vv:GetAttribute("BreakableID") == "Comet" then
