@@ -5,6 +5,9 @@ wait(1)
 Ranks = require(game.ReplicatedStorage.Library.Types.Ranks)
 Data = require(game.ReplicatedStorage.Library.Client.Save)
 Zones = require(game.ReplicatedStorage.Library.Directory.Zones)
+
+
+
 Eggs = require(game.ReplicatedStorage.Library.Directory.Eggs)
 
 function FetchData(name)
@@ -60,6 +63,8 @@ function GetRandomZone()
     end
     return List[math.random(1 , #List)]
 end
+
+
 function GetZones_Num()
     _ , a = GetLastZone()
     return a
@@ -205,7 +210,15 @@ spawn(function()
         end
     end)
 end)
-
+spawn(function()
+    pcall(function()
+        while wait(30) do
+            game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, true, game, 1)
+            wait(.1)
+            game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, false, game, 1)
+        end
+    end)
+end)
 spawn(function()
     pcall(function()
         while task.wait() do
@@ -243,9 +256,7 @@ spawn(function()
 end)
 
 _G.AutoRankUp = true
-for i,v in pairs(workspace.__THINGS.Flags:GetChildren()) do
-    table.foreach(v.Flag:GetAttributes() , print)
-end
+
 
 while _G.AutoRankUp do task.wait()
     pcall(function()
@@ -599,25 +610,24 @@ while _G.AutoRankUp do task.wait()
                 break
 
                 elseif v.Type == 33 then
-
-
-                    Last_Zone = GetRandomZone()
-
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
-
+                        
                     for ii,vv in pairs(FetchData("Inventory").Misc) do
                         if vv.id:find("Flag") then
-                            local args = {
-                                [1] =   v.id,
-                                [2] = tostring(ii)
-                            }
-                            
-                            game:GetService("ReplicatedStorage").Network:FindFirstChild("Flags: Consume"):InvokeServer(unpack(args))
+                                Last_Zone = GetRandomZone()
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+                                wait(.2)
+                                local args = {
+                                    [1] =  vv.id,
+                                    [2] = tostring(ii)
+                                }
+                                game:GetService("ReplicatedStorage").Network:FindFirstChild("Flags: Consume"):InvokeServer(unpack(args))
+                    
                             break
                         end
-                    end
+                    end                    
 
-                    break
+
+                break
                 elseif v.Type == 1 then
                     
                     if v.BreakableType then
@@ -774,9 +784,7 @@ while _G.AutoRankUp do task.wait()
                 end
 
 
-                game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, true, game, 1)
-                            wait(.1)
-                            game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, false, game, 1)
+                
 
             end
         end
