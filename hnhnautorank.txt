@@ -14,6 +14,9 @@ function FetchData(name)
     return Data:GetSaves()[game.Players.LocalPlayer][name]
 end 
 
+table.foreach(FetchData("Goals"), function(i,v)
+table.foreach(v , print)
+end)
 
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(215.1314697265625, 28.358858108520508, -656.6474609375)
 wait(1)
@@ -357,17 +360,17 @@ while _G.AutoRankUp do task.wait()
                     break
                 elseif v.Type == 7 then
                     if v.CurrencyID == "Coins" then
-                    GoToZone("Spawn")
+                        GoToZone("Spawn")
 
-                    for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                        if vv:GetAttribute("ParentID") == "Spawn" then
-                            
-                            _G.ID = vv:GetAttribute("BreakableUID")
-                            break
+                        for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                            if vv:GetAttribute("ParentID") == "Spawn" then
+                                
+                                _G.ID = vv:GetAttribute("BreakableUID")
+                                break
+                            end
                         end
-                    end
-                    break
-                    else
+                        break
+                    elseif v.CurrencyID == "Diamonds" then
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(214.5154571533203, 27.293315887451172, -586.52490234375)
 
                         for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
