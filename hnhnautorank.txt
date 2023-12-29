@@ -414,10 +414,13 @@ while _G.AutoRankUp do task.wait()
                     break
                 elseif v.Type == 31 then
 
-                    GoToZone("Spawn")
+                    
+                    havecoinjar = nil
 
                     for ii,vv in pairs(FetchData("Inventory").Misc) do
                         if vv.id == "Coin Jar" then
+                            havecoinjar = true
+
                             local args = {
                                 [1] = tostring(ii)
                             }
@@ -426,25 +429,45 @@ while _G.AutoRankUp do task.wait()
                         end
                     end
                     
+                    if havecoinjar then
+                        GoToZone("Spawn")
 
-                    for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                                    
-                        if vv:GetAttribute("ParentID") == "Spawn" then
+                        for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                        
+                            if vv:GetAttribute("ParentID") == "Spawn" then
+                                
+                                _G.ID = vv:GetAttribute("BreakableUID")
+                                break
                             
-                            _G.ID = vv:GetAttribute("BreakableUID")
-                            break
-                        
+                            end
                         end
+                    else
+                    
+                        Last_Zone = GetLastZone()
+                    
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+                            
+                        for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                    
+                            if vv:GetAttribute("ParentID") == Last_Zone then
+                                    
+                                _G.ID = vv:GetAttribute("BreakableUID")
+                                break
+                                
+                            end
+                        end
+                    
                     end
                     break
                 elseif v.Type == 37 then
 
-                    Last_Zone = GetLastZone()
-
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+                    havecoinjar = nil
 
                     for ii,vv in pairs(FetchData("Inventory").Misc) do
                         if vv.id == "Coin Jar" then
+                            
+                            havecoinjar = true
+
                             local args = {
                                 [1] = tostring(ii)
                             }
@@ -453,23 +476,46 @@ while _G.AutoRankUp do task.wait()
                         end
                     end
                     
+                    if havecoinjar then
+                        Last_Zone = GetLastZone()
 
-                    for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                                    
-                        if vv:GetAttribute("ParentID") == Last_Zone then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+
+                        for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                        
+                            if vv:GetAttribute("ParentID") == Last_Zone then
+                                
+                                _G.ID = vv:GetAttribute("BreakableUID")
+                                break
                             
-                            _G.ID = vv:GetAttribute("BreakableUID")
-                            break
-                        
+                            end
+                        end
+                        break
+                    else
+                        Last_Zone = GetLastZone()
+                    
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+                            
+                        for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                    
+                            if vv:GetAttribute("ParentID") == Last_Zone then
+                                    
+                                _G.ID = vv:GetAttribute("BreakableUID")
+                                break
+                                
+                            end
                         end
                     end
                     break
                 elseif v.Type == 32 then
 
-                    GoToZone("Spawn")
+                    
+                    havecomet = nil
 
                     for ii,vv in pairs(FetchData("Inventory").Misc) do
                         if vv.id == "Comet" then
+                            havecomet = true
+
                             local args = {
                                 [1] = tostring(ii)
                             }
@@ -478,23 +524,43 @@ while _G.AutoRankUp do task.wait()
                         end
                     end
                     
+                    if havecomet then
+                        GoToZone("Spawn")
 
-                    for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                                    
-                        if vv:GetAttribute("BreakableID") == "Comet" then
+                        for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                        
+                            if vv:GetAttribute("BreakableID") == "Comet" then
+                                
+                                _G.ID = vv:GetAttribute("BreakableUID")
+                                break
                             
-                            _G.ID = vv:GetAttribute("BreakableUID")
-                            break
-                        
+                            end
+                        end
+                    else
+                        Last_Zone = GetLastZone()
+                    
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+                            
+                        for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                    
+                            if vv:GetAttribute("ParentID") == Last_Zone then
+                                    
+                                _G.ID = vv:GetAttribute("BreakableUID")
+                                break
+                                
+                            end
                         end
                     end
                     break
 
                 elseif v.Type == 38 then
-                    GoToBestZone()
+                    havecomet = nil
                     
                     for ii,vv in pairs(FetchData("Inventory").Misc) do
                         if vv.id == "Comet" then
+
+                            havecomet = true
+
                             local args = {
                                 [1] = tostring(ii)
                             }
@@ -503,17 +569,35 @@ while _G.AutoRankUp do task.wait()
                         end
                     end
                     
+                    if havecomet then
+                        GoToBestZone()
 
-                    for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                                    
-                        if vv:GetAttribute("BreakableID") == "Comet" then
+                        for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                        
+                            if vv:GetAttribute("BreakableID") == "Comet" then
+                                
+                                _G.ID = vv:GetAttribute("BreakableUID")
+                                break
                             
-                            _G.ID = vv:GetAttribute("BreakableUID")
-                            break
-                        
+                            end
+                        end
+                    else
+                        Last_Zone = GetLastZone()
+                    
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+                            
+                        for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                    
+                            if vv:GetAttribute("ParentID") == Last_Zone then
+                                    
+                                _G.ID = vv:GetAttribute("BreakableUID")
+                                break
+                                
+                            end
                         end
                     end
                 break
+
                 elseif v.Type == 33 then
 
 
@@ -690,7 +774,9 @@ while _G.AutoRankUp do task.wait()
                 end
 
 
-
+                game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, true, game, 1)
+                            wait(.1)
+                            game:GetService("VirtualInputManager"):SendMouseButtonEvent(200, 200, 0, false, game, 1)
 
             end
         end
