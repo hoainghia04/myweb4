@@ -10,6 +10,7 @@ Eggs = require(game.ReplicatedStorage.Library.Directory.Eggs)
 function FetchData(name)
     return Data:GetSaves()[game.Players.LocalPlayer][name]
 end 
+table.foreach(FetchData("Goals"), function(i,v) table.foreach(v , print) end)
 
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(215.1314697265625, 28.358858108520508, -656.6474609375)
 wait(1)
@@ -420,7 +421,7 @@ while _G.AutoRankUp do task.wait()
                                 break
                             end
 
-                            Last_Zone = "Crimson Forest"
+                            Last_Zone = Last_Zone()
                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
                     
                             for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
@@ -430,6 +431,30 @@ while _G.AutoRankUp do task.wait()
                                     _G.ID = vv:GetAttribute("BreakableUID")
                                     break
                                 
+                                end
+                            end
+                        else
+                            table.foreach(Zones , function(i,v)
+                                if v.Breakables.Main then
+                                    table.foreach(v.Breakables.Main.Data , function(ii,vv)
+                                        if string.find(vv.Type , "Coins") then
+                                            Last_Zone = tostring(i)
+    
+                                            if Match_Zone(Last_Zone) then
+                                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+                                            end
+                                        end
+                                    end)
+                                end
+                            end)
+    
+                            for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                if Match_Zone(vv:GetAttribute("ParentID")) and string.find(tostring(vv:GetAttribute("BreakableID")) , "Coins") then
+                                    
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vv:GetPivot()
+    
+                                    _G.ID = vv:GetAttribute("BreakableUID")
+                                    break
                                 end
                             end
                         end
@@ -447,7 +472,7 @@ while _G.AutoRankUp do task.wait()
                                 end)
                             end
                         end)
-
+                        
                         for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
                             if Match_Zone(vv:GetAttribute("ParentID")) and string.find(tostring(vv:GetAttribute("BreakableID")) , "Coins") then
                                 
