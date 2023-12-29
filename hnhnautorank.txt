@@ -217,7 +217,7 @@ end)
 
 spawn(function()
     pcall(function()
-        while wait(120) do
+        while wait(240) do
             for i = 1,29 do task.wait()
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(695.9906005859375, 16.557292938232422, -251.91146850585938)
                 spawn(function()
