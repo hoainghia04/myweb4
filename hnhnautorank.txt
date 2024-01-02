@@ -10,6 +10,7 @@ Eggs = require(game.ReplicatedStorage.Library.Directory.Eggs)
 function FetchData(name)
     return Data:GetSaves()[game.Players.LocalPlayer][name]
 end 
+table.foreach(FetchData("Goals"), function(i,v) table.foreach(v , print) end)
 
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(215.1314697265625, 28.358858108520508, -656.6474609375)
 wait(1)
@@ -214,10 +215,9 @@ spawn(function()
     end)
 end)
 
-
 spawn(function()
     pcall(function()
-        while wait(200) do
+        while wait(240) do
             for i = 1,12 do
                 if table.find(FetchData("FreeGiftsRedeemed") , i) then
                     local args = {
@@ -271,31 +271,6 @@ end)
 spawn(function()
     pcall(function()
         while wait(.2) do
-            for i,v in pairs(game.Players.LocalPlayer.leaderstats:GetChildren()) do
-                if v.Name:find("Diamonds") then
-                    diamond = v.Value
-                end
-            end
-           
-
-            for i,v in pairs(game.workspace.Map:GetChildren()) do
-                if v.INTERACT and v.INTERACT.Upgrades and v.INTERACT.Upgrades:FindFirstChildOfClass("Model")  then
-                    name = v.Name:split("| ")
-                    
-                    if not table.find(FetchData("UpgradesOwned")[v.INTERACT.Upgrades:FindFirstChildOfClass("Model").Name] , v.INTERACT.Upgrades:FindFirstChildOfClass("Model"):GetAttribute("UpgradeTier")) and diamond >= v.INTERACT.Upgrades:FindFirstChildOfClass("Model"):GetAttribute("UpgradeCost") then    
-
-                        local args = {
-                            [1] = v.INTERACT.Upgrades:FindFirstChildOfClass("Model").Name,
-                            [2] = name[2]
-                        }
-
-                        game:GetService("ReplicatedStorage").Network.Upgrades_Purchase:InvokeServer(unpack(args))
-
-                    end
-                end
-            end
-
-            table.foreach(game.workspace.Map["6 | Cherry Blossom"].INTERACT.Upgrades.Walkspeed:GetAttributes() , print)
             for i,v in pairs(FetchData("Inventory")["Misc"]) do
                 if v.id == "Gift Bag" then
 
@@ -539,34 +514,35 @@ spawn(function()
                                             end
                                         end
                                     else
-                                    Last_Zone = GetZoneName_ByNum(5)
-                                    
+                                        Last_Zone = GetLastZone()
+            
                                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
-                
-                                        for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                                            if vv:GetAttribute("ParentID")) == Last_Zone then
-                                                
-                                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vv:GetPivot()
-                
-                                                _G.ID = vv:GetAttribute("BreakableUID")
-                                                break
-                                            end
-                                        end
-                                    end
-                                else
-                                    Last_Zone = GetZoneName_ByNum(5)
-
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
-                                    
+            
                                     for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                                        if vv:GetAttribute("ParentID")) == Last_Zone then
+                                                    
+                                        if vv:GetAttribute("ParentID") == Last_Zone then
                                             
-                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vv:GetPivot()
-
                                             _G.ID = vv:GetAttribute("BreakableUID")
                                             break
+                                        
                                         end
                                     end
+                                    break
+                                else
+                                    Last_Zone = GetLastZone()
+            
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+            
+                                    for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                                    
+                                        if vv:GetAttribute("ParentID") == Last_Zone then
+                                            
+                                            _G.ID = vv:GetAttribute("BreakableUID")
+                                            break
+                                        
+                                        end
+                                    end
+                                    break
                                 end
 
                             elseif v.Type == 31 then
@@ -739,20 +715,20 @@ spawn(function()
                                     end
                                 
 
-                                
-                                    for i = 1,120 do wait(.1)
-                                        Last_Zone = GetLastZone()
-    
-                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
-    
-                                        for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                                            if vv:GetAttribute("ParentID") == Last_Zone then
-                                                
-                                                _G.ID = vv:GetAttribute("BreakableUID")
-                                                break
-                                            end
+                                for i = 1,120 do wait(.1)
+                                    Last_Zone = GetLastZone()
+
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+
+                                    for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                        if vv:GetAttribute("ParentID") == Last_Zone then
+                                            
+                                            _G.ID = vv:GetAttribute("BreakableUID")
+                                            break
                                         end
                                     end
+                                end
+                                
                                 break
                             else
                                 Last_Zone = GetLastZone()
