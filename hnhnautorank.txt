@@ -218,16 +218,6 @@ end)
 spawn(function()
     pcall(function()
         while wait(240) do
-            for i = 1,12 do
-                if table.find(FetchData("FreeGiftsRedeemed") , i) then
-                    local args = {
-                        [1] = i
-                    }
-                    
-                    game:GetService("ReplicatedStorage").Network:FindFirstChild("Redeem Free Gift"):InvokeServer(unpack(args))
-                end
-            end
-
             for i = 1,29 do task.wait()
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(695.9906005859375, 16.557292938232422, -251.91146850585938)
                 spawn(function()
@@ -514,35 +504,54 @@ spawn(function()
                                             end
                                         end
                                     else
-                                        Last_Zone = GetLastZone()
-            
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
-            
-                                    for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                                                    
-                                        if vv:GetAttribute("ParentID") == Last_Zone then
-                                            
-                                            _G.ID = vv:GetAttribute("BreakableUID")
-                                            break
-                                        
+                                        table.foreach(Zones , function(i,v)
+                                            if v.Breakables.Main then
+                                                table.foreach(v.Breakables.Main.Data , function(ii,vv)
+                                                    if string.find(vv.Type , "Coins") then
+                                                        Last_Zone = tostring(i)
+                
+                                                        if Match_Zone(Last_Zone) then
+                                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+                                                        end
+                                                    end
+                                                end)
+                                            end
+                                        end)
+                
+                                        for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
+                                            if Match_Zone(vv:GetAttribute("ParentID")) and string.find(tostring(vv:GetAttribute("BreakableID")) , "Coins") then
+                                                
+                                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vv:GetPivot()
+                
+                                                _G.ID = vv:GetAttribute("BreakableUID")
+                                                break
+                                            end
                                         end
                                     end
-                                    break
                                 else
-                                    Last_Zone = GetLastZone()
-            
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
-            
+                                    table.foreach(Zones , function(i,v)
+                                        if v.Breakables.Main then
+                                            table.foreach(v.Breakables.Main.Data , function(ii,vv)
+                                                if string.find(vv.Type , "Coins") then
+                                                    Last_Zone = tostring(i)
+
+                                                    if Match_Zone(Last_Zone) then
+                                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.X , Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Y + 2, Zones[Last_Zone].ZoneFolder.INTERACT.BREAK_ZONES.BREAK_ZONE.CFrame.Z)
+                                                    end
+                                                end
+                                            end)
+                                        end
+                                    end)
+                                    
                                     for ii,vv in pairs(game.workspace.__THINGS.Breakables:GetChildren()) do
-                                                    
-                                        if vv:GetAttribute("ParentID") == Last_Zone then
+                                        if Match_Zone(vv:GetAttribute("ParentID")) and string.find(tostring(vv:GetAttribute("BreakableID")) , "Coins") then
                                             
+                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vv:GetPivot()
+
                                             _G.ID = vv:GetAttribute("BreakableUID")
                                             break
-                                        
                                         end
                                     end
-                                    break
                                 end
 
                             elseif v.Type == 31 then
