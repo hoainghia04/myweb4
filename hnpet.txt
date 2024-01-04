@@ -39,6 +39,28 @@ spawn(function()
 end)
 
 spawn(function()
+    _G.Data_Trade = {}
+    _G.T = {}
+    for i,v in pairs(getgc(true)) do
+        if typeof(v) == "table" and rawget(v, "Inventory") then
+            if typeof(v["Inventory"]) == "table" then
+                if v["Inventory"]["Misc"] then
+                    for ii,vv in pairs(v["Inventory"]["Misc"]) do
+                        if vv.id then
+                            if not _G.Data_Trade[tostring(ii)] then
+                                _G.Data_Trade[tostring(ii)] = {}
+                                table.insert(_G.T , tostring(ii))
+                            end
+                            _G.Data_Trade[tostring(ii)]["id"] = vv.id
+                            _G.Data_Trade[tostring(ii)]["Type"] = "Misc" 
+                        end
+                    end
+                end
+            end
+        end
+    end
+end)
+spawn(function()
   pcall(function()
     while wait(1) do
      game:GetService("VirtualInputManager"):SendKeyEvent(true, "Space", false, game)
@@ -48,36 +70,48 @@ spawn(function()
   end)
 end)
     
+repeat wait() until _G.T
 
+for i,v in pairs(game.Players.LocalPlayer:WaitForChild("leaderstats"):GetChildren()) do
+    if v.Name:find("Diamonds") then
+        diamond = v.Value
+    end
+end
+
+for i,v in pairs(getgc(true)) do
+    if typeof(v) == "table" and rawget(v, _G.T[1]) then
+        for ii,vv in pairs(v) do
+            if typeof(vv) == "number" and vv == diamond then
+                _G.GiftGem = tostring(ii)
+            end
+        end
+    end
+end
 
 spawn(function()
     pcall(function()
-        while wait(.4) do
-            for i,v in pairs(FetchData("Inventory").Currency) do
-                if v.id == "Diamonds" then
-                    _id = tostring(i)
+        while wait(.1) do
+            if _G.GiftGem then 
+                for i,v in pairs(game.Players.LocalPlayer:WaitForChild("leaderstats"):GetChildren()) do
+                    if v.Name:find("Diamonds") then
+                        diamond = v.Value
+                    end
                 end
-            end
-            for i,v in pairs(game.Players.LocalPlayer:WaitForChild("leaderstats"):GetChildren()) do
-                if v.Name:find("Diamonds") then
-                    diamond = v.Value
+                if diamond >= 350000 then
+                    local args = {
+                        [1] = _G.NameGift,
+                        [2] = "HN GIF",
+                        [3] = "Currency",
+                        [4] = _G.GiftGem,
+                        [5] = diamond - 10000
+                    }
+                    
+                    game:GetService("ReplicatedStorage").Network:FindFirstChild("Mailbox: Send"):InvokeServer(unpack(args))                    
                 end
-            end
-            if diamond >= 350000 then
-                local args = {
-                    [1] = _G.NameGift,
-                    [2] = "Hello World!",
-                    [3] = "Currency",
-                    [4] = _id,
-                    [5] = diamond - 10000
-                }
-                
-                game:GetService("ReplicatedStorage").Network:FindFirstChild("Mailbox: Send"):InvokeServer(unpack(args))                    
             end
         end
     end)
 end)
-
 
 spawn(function()
     pcall(function()
