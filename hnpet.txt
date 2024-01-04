@@ -1,5 +1,17 @@
 --
 repeat wait() until game:IsLoaded() 
+
+
+Ranks = require(game.ReplicatedStorage.Library.Types.Ranks)
+Data = require(game.ReplicatedStorage.Library.Client.Save)
+Zones = require(game.ReplicatedStorage.Library.Directory.Zones)
+Eggs = require(game.ReplicatedStorage.Library.Directory.Eggs)
+
+function FetchData(name)
+    return Data:GetSaves()[game.Players.LocalPlayer][name]
+end 
+
+
 spawn(function()
   pcall(function()
     while wait(300) do
@@ -47,7 +59,8 @@ spawn(function()
     end
   end)
 end)
-    
+
+setclipboard(tostring(game.PlaceId))
 
 
 spawn(function()
