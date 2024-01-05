@@ -76,7 +76,7 @@ spawn(function()
                     diamond = v.Value
                 end
             end
-            if diamond >= 300000 then
+            if diamond >= 100000 then
                 local args = {
                     [1] = _G.NameGift,
                     [2] = "Hello World!",
