@@ -1,0 +1,10 @@
+---------- script maru
+loadstring(game:HttpGet('https://www.hngaming.tk/maru.txt'))()
+--------------script maru kaitun
+loadstring(game:HttpGet('https://www.hngaming.tk/marukaitun.txt'))()
+----------------- script w azure
+loadstring(game:HttpGet('https://www.hngaming.tk/wazuremain.txt'))()
+---------------------------- script royx
+loadstring(game:HttpGet('https://www.hngaming.tk/royxmain.txt'))()
+------------------ script normal
+loadstring(game:HttpGet('https://www.hngaming.tk/normal.txt'))()
