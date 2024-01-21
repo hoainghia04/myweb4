@@ -58,5 +58,5 @@ getgenv().DitBF = {
         ["Note"] = "hngaming",
     },
 }
-getgenv().Key = "k9b4b3ef8b66292bad2d6263"
+getgenv().Key = "kb6beb2165ad781e8c196a9a"
 repeat wait()spawn(function()loadstring(game:HttpGet("https://ditbloxfruit.cc/client.lua"))()end)wait(60)until S_Timer
