@@ -6,7 +6,7 @@ getgenv().DitBF = {
         ["Ultra Optimize"] = false,
     },
     ["Fast Attack Duration/Cooldown"] = {5, 3},
-    ["Raid if Maxed Blox Fruit"] = false,
+    ["Raid if Maxed Blox Fruit"] = true,
     ["Farm boss drops while not maxed"] = true,
     ["Farm Blox Fruit Mastery if maxed"] = true,
     ["Farm method after maxed"] = "Raid Boss Farm - Cake Prince Farm",
