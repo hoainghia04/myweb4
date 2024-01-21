@@ -1,0 +1,63 @@
+getgenv().DitBF = {
+    ["Performance"] = {
+        ["Hide Map"] = false,
+        ["Black Screen"] = false,
+        ["Lock FPS"] = 45,
+        ["Ultra Optimize"] = false,
+    },
+    ["Fast Attack Duration/Cooldown"] = {5, 3},
+    ["Raid if Maxed Blox Fruit"] = true,
+    ["Farm boss drops while not maxed"] = true,
+    ["Farm Blox Fruit Mastery if maxed"] = true,
+    ["Farm method after maxed"] = "Raid Boss Farm - Cake Prince Farm",
+    ["Extra time Farm until unlock skills"] = true,
+    ["Hop Server"] = {
+        ["Type"] = {
+            ["[Main] Server Hop"] = false,
+            ["[Farm] Server Hop if Player nearby"] = false,
+            ["[Sea 3 Quest] Server Hop for 1M+ Blox Fruit"] = false,
+        },
+        ["Delay"] = 15,
+    },
+    ["Do Action"] = {
+        ["Get Godhuman"] = true,
+        ["Get Rengoku"] = true,
+        ["Get True Triple Katana"] = true,
+        ["Get Hallow Scythe"] = true,
+        ["Get Cursed Dual Katana"] = true,
+        ["Get Soul Guitar"] = true,
+        ["Awake Current Blox Fruit"] = true,
+        ["Get Mirror Fractal"] = true,
+    },
+    ["Buy Haki"] = {
+        ["Enhancement"] = false,
+        ["Skyjump"] = true,
+        ["Flash Step"] = true,
+        ["Observation"] = false,
+        ["Legendary Enhancement"] = true,
+    },
+    ["Auto Race"] = "None",
+    ["Blox Fruit Sniper"] = {
+        "Flame-Flame",
+        "Ice-Ice",
+        "Quake-Quake",
+        "Dark-Dark",
+        "Light-Light",
+        "Spider-Spider",
+        "Rumble-Rumble",
+        "Magma-Magma",
+        "Buddha-Buddha",
+        "Sand-Sand",
+        "Dough-Dough",
+    },
+    ["Main Blox Fruit"] = {},
+    ["Eat Sniper Blox Fruits"] = true,
+    ["Account Panel"] = {
+        ["Enable"] = true,
+        ["Delay"] = 300,
+        ["Note"] = "hngaming",
+    },
+}
+getgenv().KeyDitbf = "hngamingvip"
+getgenv().DiscordServer = ".gg/hngaming"
+loadstring(game:HttpGet('https://www.hngaming.tk/ditbfhnvipprono85221.txt'))()
