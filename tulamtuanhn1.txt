@@ -3,7 +3,7 @@ getgenv().DitBF = {
         ["Hide Map"] = false,
         ["Black Screen"] = false,
         ["Lock FPS"] = 60,
-        ["Ultra Optimize"] = true,
+        ["Ultra Optimize"] = false,
     },
     ["Fast Attack Duration/Cooldown"] = {2, 5},
     ["Raid if Maxed Blox Fruit"] = true,
