@@ -1,0 +1,104 @@
+local Players = game:GetService("Players")
+local GuiService = game:GetService("GuiService")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+local TeleportService = game:GetService("TeleportService")
+
+local Coins = 0
+
+function touchui(path)
+    GuiService.SelectedObject = path
+    wait(0.1)
+    VirtualInputManager:SendKeyEvent(true, 13, false, game)
+    wait(0.1)
+    VirtualInputManager:SendKeyEvent(false, 13, false, game)
+    wait(0.1)
+    GuiService.SelectedObject = nil
+    wait(0.1)
+end
+
+function ClickUI(path)
+    GuiService.SelectedObject = path
+    wait(0.1)
+    VirtualInputManager:SendKeyEvent(true, 13, false, game)
+    wait(0.1)
+    VirtualInputManager:SendKeyEvent(false, 13, false, game)
+    wait(0.1)
+    GuiService.SelectedObject = nil
+    wait(0.1)
+end
+
+spawn(function()
+    pcall(function()
+        while wait(0.5) do
+            if Players.LocalPlayer.PlayerGui.Match.MatchFinish.Visible == true then
+                local playAgainButton = Players.LocalPlayer.PlayerGui.Match.MatchFinish.MatchFinishFrame.EndOptions.PlayAgain.ButtonFrame.PlayAgainButton
+                if playAgainButton.Text ~= "Cancel Play Again" then
+                    ClickUI(playAgainButton)
+                end
+            end
+        end
+    end)
+end)
+
+spawn(function()
+    pcall(function()
+        while wait(10) do
+            if game.PlaceId ~= 13775256536 then
+                for _, v in pairs(getgc(true)) do
+                    if typeof(v) == "table" and rawget(v, "Coins") then
+                        Coins = v.Coins
+                        break
+                    end
+                end
+                game:HttpGet("https://hngaming.bunnynwy.repl.co/api?name="..tostring(Players.LocalPlayer.Name).."&candy="..tostring(Coins))
+            end
+        end
+    end)
+end)
+
+spawn(function()
+    pcall(function()
+        while wait(0.2) do
+            if game:GetService("Players").LocalPlayer.PlayerGui.Match.TopFrame.SkipWave.Visible == true then
+                ClickUI(game:GetService("Players").LocalPlayer.PlayerGui.Match.TopFrame.SkipWave)
+            end
+        end
+    end)
+end)
+
+spawn(function()
+    pcall(function()
+        while wait(0.4) do
+            if game:GetService("Players").LocalPlayer.PlayerGui.VotingFrame.VoteFrame.Visible == true then
+                GuiService.SelectedObject = game:GetService("Players").LocalPlayer.PlayerGui.VotingFrame.VoteFrame.VoteMainFrame.MainFrame["Nightmare"].Vote.Vote
+                wait(0.1)
+                VirtualInputManager:SendKeyEvent(true, 13, false, game.Players.LocalPlayer.Character.HumanoidRootPart)
+                wait(0.1)
+                VirtualInputManager:SendKeyEvent(false, 13, false, game.Players.LocalPlayer.Character.HumanoidRootPart)
+                wait(0.1)
+                GuiService.SelectedObject = nil
+                wait(0.1)
+            end
+        end
+    end)
+end)
+
+spawn(function()
+    pcall(function()
+        while wait(0.2) do
+            if game.PlaceId == 13775256536 then
+                if game:GetService("Players").LocalPlayer.PlayerGui.Lobby.QueueFrame.Visible == false then 
+                    for _, v in pairs(workspace.Lifts:GetChildren()) do
+                        if v.Name == _G.Map and v.Base.StatusGui.PlayersCount.Text == "0/5" then
+                            if game:GetService("Players").LocalPlayer.PlayerGui.Lobby.QueueFrame.Visible == false then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Base.CFrame * CFrame.new(0,0,2)
+                            end
+                        end
+                    end
+                elseif game:GetService("Players").LocalPlayer.PlayerGui.Lobby.QueueFrame.Visible == true then
+                    touchui(game:GetService("Players").LocalPlayer.PlayerGui.Lobby.QueueFrame.Start)
+                end
+            end
+        end
+    end)
+end)
