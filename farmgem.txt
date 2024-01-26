@@ -6,6 +6,7 @@ while true do
     wait(6 * 60 * 60)
 end
 end)
+wait(1)
 spawn(function()
   pcall(function()
     while wait(300) do
