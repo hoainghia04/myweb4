@@ -1,5 +1,10 @@
 --
 repeat wait() until game:IsLoaded()
+function FetchData(name)
+    return Data:GetSaves()[game.Players.LocalPlayer][name]
+end 
+table.foreach(FetchData("Goals"), function(i,v) table.foreach(v , print) end)
+
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(215.1314697265625, 28.358858108520508, -656.6474609375)
 wait(1)
 spawn(function()
