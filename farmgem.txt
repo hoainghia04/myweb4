@@ -1,11 +1,6 @@
 --
 repeat wait() until game:IsLoaded()
-spawn(function()
-while true do
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(215.1314697265625, 28.358858108520508, -656.6474609375)
-    wait(6 * 60 * 60)
-end
-end)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(215.1314697265625, 28.358858108520508, -656.6474609375)
 wait(1)
 spawn(function()
   pcall(function()
