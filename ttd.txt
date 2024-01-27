@@ -1,13 +1,20 @@
-repeat wait() until game:IsLoaded()
+repeat
+    wait()
+until game:IsLoaded()
 
-getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
-    if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
-        game:GetService("TeleportService"):Teleport(game.PlaceId)
+getgenv().rejoin =
+    game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(
+    function(child)
+        if
+            child.Name == "ErrorPrompt" and child:FindFirstChild("MessageArea") and
+                child.MessageArea:FindFirstChild("ErrorFrame")
+         then
+            game:GetService("TeleportService"):Teleport(game.PlaceId)
+        end
     end
-end)
+)
 
 function touchui(path)
-
     game:GetService("GuiService").SelectedObject = path
 
     wait(.1)
@@ -23,136 +30,145 @@ function touchui(path)
     game:GetService("GuiService").SelectedObject = nil
 
     wait(.1)
-
 end
 
 function ClickUI(path)
     game:GetService("GuiService").SelectedObject = path
-     wait(.1)
+    wait(.1)
     game:GetService("VirtualInputManager"):SendKeyEvent(true, 13, false, game)
     wait(.1)
-     game:GetService("VirtualInputManager"):SendKeyEvent(false, 13, false, game)
-     wait(.1)
+    game:GetService("VirtualInputManager"):SendKeyEvent(false, 13, false, game)
+    wait(.1)
     game:GetService("GuiService").SelectedObject = nil
     wait(.1)
 end
 
-spawn(function()
-    pcall(function()
-        while wait(.5) do
-if game:GetService("Players").LocalPlayer.PlayerGui.Match.MatchFinish.Visible == true then
-    if game:GetService("Players").LocalPlayer.PlayerGui.Match.MatchFinish.MatchFinishFrame.EndOptions.PlayAgain.ButtonFrame.PlayAgainButton.Text ~= "Cancel Play Again" then
-        ClickUI(game:GetService("Players").LocalPlayer.PlayerGui.Match.MatchFinish.MatchFinishFrame.EndOptions.PlayAgain.ButtonFrame.PlayAgainButton)
-    end
-end
-end
-end)
-end)
-
-spawn(function()
-    pcall(function()
-        while wait(10) do
-            if game.PlaceId ~= 13775256536 then
-                for i,v in pairs(getgc(true)) do
-                    if typeof(v) == "table" and rawget(v , "Coins") then
-                        for ii,vv in pairs(v) do
-                            if tostring(ii) == "Coins" and typeof(vv) == "number" then
-                                Coins = vv
-                            end
+spawn(
+    function()
+        pcall(
+            function()
+                while wait(.5) do
+                    if game:GetService("Players").LocalPlayer.PlayerGui.Match.MatchFinish.Visible == true then
+                        if
+                            game:GetService("Players").LocalPlayer.PlayerGui.Match.MatchFinish.MatchFinishFrame.EndOptions.PlayAgain.ButtonFrame.PlayAgainButton.Text ~=
+                                "Cancel Play Again"
+                         then
+                            ClickUI(
+                                game:GetService("Players").LocalPlayer.PlayerGui.Match.MatchFinish.MatchFinishFrame.EndOptions.PlayAgain.ButtonFrame.PlayAgainButton
+                            )
                         end
                     end
                 end
-                
-               game:HttpGet("https://hngaming.bunnynwy.repl.co/api?name="..tostring(game.Players.LocalPlayer.Name).."&candy="..tostring(Coins))
             end
-        end
-    end)
-end)
+        )
+    end
+)
 
+spawn(
+    function()
+        pcall(
+            function()
+                while wait(10) do
+                    if game.PlaceId ~= 13775256536 then
+                        for i, v in pairs(getgc(true)) do
+                            if typeof(v) == "table" and rawget(v, "Coins") then
+                                for ii, vv in pairs(v) do
+                                    if tostring(ii) == "Coins" and typeof(vv) == "number" then
+                                        Coins = vv
+                                    end
+                                end
+                            end
+                        end
 
-
-
-
-spawn(function()
-
-    pcall(function()
-
-        while wait(.2) do
-
-            if game:GetService("Players").LocalPlayer.PlayerGui.Match.TopFrame.SkipWave.Visible == true then
-
-                ClickUI(game:GetService("Players").LocalPlayer.PlayerGui.Match.TopFrame.SkipWave)
-
+                        game:HttpGet(
+                            "https://hngaming.bunnynwy.repl.co/api?name=" ..
+                                tostring(game.Players.LocalPlayer.Name) .. "&candy=" .. tostring(Coins)
+                        )
+                    end
+                end
             end
+        )
+    end
+)
 
-        end
+spawn(
+    function()
+        pcall(
+            function()
+                while wait(.2) do
+                    if game:GetService("Players").LocalPlayer.PlayerGui.Match.TopFrame.SkipWave.Visible == true then
+                        ClickUI(game:GetService("Players").LocalPlayer.PlayerGui.Match.TopFrame.SkipWave)
+                    end
+                end
+            end
+        )
+    end
+)
 
-    end)
-
-end)
-
-
-
-
-
-
+spawn(
+    function()
+        pcall(
+            function()
+                while wait(.4) do
+                    if game:GetService("Players").LocalPlayer.PlayerGui.VotingFrame.VoteFrame.Visible == true then
+                        game:GetService("GuiService").SelectedObject =
+                            game:GetService("Players").LocalPlayer.PlayerGui.VotingFrame.VoteFrame.VoteMainFrame.MainFrame[
+                            "Nightmare"
+                        ].Vote.Vote
+                        wait(.1)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(
+                            true,
+                            13,
+                            false,
+                            game.Players.LocalPlayer.Character.HumanoidRootPart
+                        )
+                        wait(.1)
+                        game:GetService("VirtualInputManager"):SendKeyEvent(
+                            false,
+                            13,
+                            false,
+                            game.Players.LocalPlayer.Character.HumanoidRootPart
+                        )
+                        wait(.1)
+                        game:GetService("GuiService").SelectedObject = nil
+                        wait(.1)
+                    end
+                end
+            end
+        )
+    end
+)
 
 spawn(function()
     pcall(function()
         while wait(.4) do
-            if game:GetService("Players").LocalPlayer.PlayerGui.VotingFrame.VoteFrame.Visible == true then
-                game:GetService("GuiService").SelectedObject = game:GetService("Players").LocalPlayer.PlayerGui.VotingFrame.VoteFrame.VoteMainFrame.MainFrame["Nightmare"].Vote.Vote
-                        wait(.1)
-                        game:GetService("VirtualInputManager"):SendKeyEvent(true, 13, false, game.Players.LocalPlayer.Character.HumanoidRootPart)
-                                                    wait(.1)
-                                                    game:GetService("VirtualInputManager"):SendKeyEvent(false, 13, false, game.Players.LocalPlayer.Character.HumanoidRootPart)
-                                                    wait(.1)
-                                                    game:GetService("GuiService").SelectedObject = nil
-                                                    wait(.1)
+            if game:GetService("Players").LocalPlayer.PlayerGui.Match.WaveInfo.AutoSkip.OnAndOff.BackgroundColor3 == Color3.fromRGB(255,0,0) then
+                ClickUI(game:GetService("Players").LocalPlayer.PlayerGui.Match.WaveInfo.AutoSkip.OnAndOff)
             end
         end
     end)
 end)
 
-spawn(function()
-
-    pcall(function()
-
-        while wait(.2) do
-
-           
-
-                if game.PlaceId == 13775256536 then
-
-                    if game:GetService("Players").LocalPlayer.PlayerGui.Lobby.QueueFrame.Visible == false then 
-
-                        for i,v in pairs(workspace.Lifts:GetChildren()) do
-
-                            if v.Name == _G.Map and v.Base.StatusGui.PlayersCount.Text == "0/5" then
-
-                                if game:GetService("Players").LocalPlayer.PlayerGui.Lobby.QueueFrame.Visible == false then
-
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Base.CFrame * CFrame.new(0,0,2)
-
+spawn(
+    function()
+        pcall(
+            function()
+                while wait(.2) do
+                    if game.PlaceId == 13775256536 then
+                        if game:GetService("Players").LocalPlayer.PlayerGui.Lobby.QueueFrame.Visible == false then
+                            for i, v in pairs(workspace.Lifts:GetChildren()) do
+                                if v.Name == _G.Map and v.Teleport.BasePart.StatusGui.PlayersCount.Text == "0/5" then
+                                    if game:GetService("Players").LocalPlayer.PlayerGui.Lobby.QueueFrame.Visible ==false then
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Teleport.Area.CFrame * CFrame.new(0, 0, 2)
+                                    end
                                 end
-
                             end
-
+                        elseif game:GetService("Players").LocalPlayer.PlayerGui.Lobby.QueueFrame.Visible == true then
+                            touchui(game:GetService("Players").LocalPlayer.PlayerGui.Lobby.QueueFrame.Start)
                         end
-
-                    elseif game:GetService("Players").LocalPlayer.PlayerGui.Lobby.QueueFrame.Visible == true then
-
-                        touchui(game:GetService("Players").LocalPlayer.PlayerGui.Lobby.QueueFrame.Start)
-
                     end
-
                 end
-
             end
-
-
-
-        
-    end)
-
-end)
+        )
+    end
+)
