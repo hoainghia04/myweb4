@@ -6,57 +6,53 @@ local Network = Library.Network
 local Balancing = Library.Balancing
 
 while getgenv().Start do wait()
-    local Zone, Zone_Info = Library["ZoneCmds"].GetMaxOwnedZone()
-    local zone, info = Library["ZoneCmds"].GetNextZone()
-    if zone and info then
-        if Balancing.CalcGatePrice(info) <= Library["CurrencyCmds"].Get("Coins") then
-            Network.Invoke("Zones_RequestPurchase", info.ZoneName)
-        end
-    end
-    if Library["MapCmds"].GetCurrentZone() ~= Zone_Info._id or not Library["MapCmds"].IsInDottedBox() then
-        if Zone_Info.ZoneFolder:FindFirstChild("INTERACT") then
-            local BreakZones = Zone_Info.ZoneFolder.INTERACT.BREAK_ZONES:GetChildren()
-            if #BreakZones == 2 then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = BreakZones[2].CFrame * CFrame.new(0, 10, 0)
-            elseif #BreakZones == 1 then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = BreakZones[1].CFrame * CFrame.new(0, 10, 0)
-            end
-        else
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Zone_Info.ZoneFolder.PERSISTENT.Teleport.CFrame
-        end
-    end
+	local Zone, Zone_Info = Library["ZoneCmds"].GetMaxOwnedZone()
+	local zone, info = Library["ZoneCmds"].GetNextZone()
+	if zone and info then
+		if Balancing.CalcGatePrice(info) <= Library["CurrencyCmds"].Get("Coins") then
+			Network.Invoke("Zones_RequestPurchase", info.ZoneName)
+		end
+	end
+	if Library["MapCmds"].GetCurrentZone() ~= Zone_Info._id or not Library["MapCmds"].IsInDottedBox() then
+		if Zone_Info.ZoneFolder:FindFirstChild("INTERACT") then
+			local BreakZones = Zone_Info.ZoneFolder.INTERACT.BREAK_ZONES:GetChildren()
+			if #BreakZones == 2 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = BreakZones[2].CFrame * CFrame.new(0, 10, 0)
+			elseif #BreakZones == 1 then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = BreakZones[1].CFrame * CFrame.new(0, 10, 0)
+			end
+		else
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Zone_Info.ZoneFolder.PERSISTENT.Teleport.CFrame
+		end
+	end
 end
 
 
 spawn(function()
     pcall(function()
         game:GetService("RunService").Heartbeat:Connect(function()
-            if _G.AutoTapper then
-                for i,v in pairs(workspace.__THINGS.Breakables:GetChildren()) do
-                    if v:IsA"Model" and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.WorldPivot.Position).magnitude < 100 then
-                        local args = {
-                            [1] = v.Name
-                        }
-
-                        game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Breakables_PlayerDealDamage"):FireServer(unpack(args))
- 						break
-                    end
+            for i,v in pairs(workspace.__THINGS.Breakables:GetChildren()) do
+                if v:IsA"Model" and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.WorldPivot.Position).magnitude < 100 then
+                    local args = {
+                        [1] = v.Name
+                    }
+ 
+                    game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Breakables_PlayerDealDamage"):FireServer(unpack(args))
+                    break
                 end
             end
         end)
     end)
 end) 
-
+ 
 spawn(function()
     pcall(function()
         while wait(.1) do
-            if _G.CollectLootBag then
-                for i,v in pairs(workspace.__THINGS.Lootbags:GetChildren()) do
-                    if v:IsA"Model" then
-                        for ii,vv in pairs(v:GetChildren()) do
-                            if vv:IsA"MeshPart" then
-                                vv.CFrame =game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-                            end
+            for i,v in pairs(workspace.__THINGS.Lootbags:GetChildren()) do
+                if v:IsA"Model" then
+                    for ii,vv in pairs(v:GetChildren()) do
+                        if vv:IsA"MeshPart" then
+                            vv.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
                         end
                     end
                 end
@@ -67,8 +63,7 @@ end)
 spawn(function()
     pcall(function()
         while wait(.1) do
-            if _G.CollectOrb then
-                for i,v in pairs(workspace.__THINGS.Orbs:GetChildren()) do
+            for i,v in pairs(workspace.__THINGS.Orbs:GetChildren()) do
                 local args = {
                     [1] = {
                         [1] = {
@@ -76,9 +71,7 @@ spawn(function()
                         }
                     }
                 }
-
                 game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Orbs_ClaimMultiple"):FireServer(unpack(args))
-                end
             end
         end
     end)
