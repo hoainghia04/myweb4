@@ -90,7 +90,7 @@ async function gen_link_get_key(code) {
 }
 
 // main
-app.get('/getkey', async (req, res) => {
+app.get('/getkeyhn', async (req, res) => {
     const hwid = req.query.hwid;
     const code = await gen_key(20);
     const ngay_het_han = moment().add(1, 'days').format('DD-MM-YYYY HH:mm:ss');
@@ -132,7 +132,7 @@ app.get('/getkey', async (req, res) => {
         }
     }
 });
-app.get('/checkkey', async (req, res) => {
+app.get('/checkkeyhn', async (req, res) => {
     const key = req.query.key;
     const hwid = req.query.hwid;
 
