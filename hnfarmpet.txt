@@ -1,3 +1,13 @@
+spawn(function()
+    pcall(function()
+      while wait(1) do
+       game:GetService("VirtualInputManager"):SendKeyEvent(true, "Space", false, game)
+      wait(.1)
+       game:GetService("VirtualInputManager"):SendKeyEvent(false, "Space", false, game)
+      end
+    end)
+  end)
+wait(.1)
 getgenv().Start = true
 
 local Library = require(game:GetService("ReplicatedStorage").Library)
@@ -50,12 +60,3 @@ while wait() do
     end)
 end
 
-spawn(function()
-    pcall(function()
-      while wait(1) do
-       game:GetService("VirtualInputManager"):SendKeyEvent(true, "Space", false, game)
-      wait(.1)
-       game:GetService("VirtualInputManager"):SendKeyEvent(false, "Space", false, game)
-      end
-    end)
-  end)
