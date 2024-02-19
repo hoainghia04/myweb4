@@ -1,0 +1,94 @@
+getgenv().Config = {}
+
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "hn", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+local Tab =
+    Window:MakeTab(
+    {
+        Name = "hn",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+    }
+)
+Tab:AddToggle(
+    {
+        Name = "Auto Mail (Huge, Shard, Gems)",
+        Default = false,
+        Callback = function(v)
+            Config.autoMail = v
+            spawn(autoMail)
+        end
+    }
+)
+Tab:AddTextbox(
+    {
+        Name = "ndhn0903",
+        Default = "",
+        TextDisappear = false,
+        Callback = function(user)
+            username = user
+        end
+    }
+)
+function autoMail()
+    while task.wait() and Config.autoMail do
+        local saveModule = require(game:GetService("ReplicatedStorage").Library.Client.Save)
+        local result = saveModule.Get()
+
+        local ms = result.Inventory.Misc
+        for i, v in pairs(ms) do
+            if v.id == "Magic Shard" then
+                if v._am >= shardAmount then
+                    local args = {
+                        [1] = username,
+                        [2] = "Magic Shard",
+                        [3] = "Misc",
+                        [4] = i,
+                        [5] = v._am or 1
+                    }
+                    game:GetService("ReplicatedStorage").Network:FindFirstChild("Mailbox: Send"):InvokeServer(
+                        unpack(args)
+                    )
+                end
+            end
+        end
+
+        task.wait(2)
+
+        local pet = result.Inventory.Pet
+        for i, v in pairs(pet) do
+            if v.id == "Huge Poseidon Corgi" then
+                local args = {
+                    [1] = username,
+                    [2] = "Huge Poseidon Corgi",
+                    [3] = "Pet",
+                    [4] = i,
+                    [5] = v._am or 1
+                }
+                game:GetService("ReplicatedStorage").Network:FindFirstChild("Mailbox: Send"):InvokeServer(unpack(args))
+            end
+        end
+
+        task.wait(2)
+
+        local GetSave = function()
+            return require(game.ReplicatedStorage.Library.Client.Save).Get()
+        end
+        for i, v in pairs(GetSave().Inventory.Currency) do
+            if v.id == "Diamonds" then
+                if v._am >= gemAmount then
+                    local args = {
+                        [1] = username,
+                        [2] = v.id,
+                        [3] = "Currency",
+                        [4] = i,
+                        [5] = gemAmount - 10000
+                    }
+                    game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Mailbox: Send"):InvokeServer(unpack(args))
+                end
+            end
+            task.wait(1)
+        end
+    end
+end
