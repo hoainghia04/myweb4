@@ -1,0 +1,47 @@
+
+getgenv().Start = not getgenv().Start
+
+local plr = game.Players.LocalPlayer
+
+local Instances = workspace.__THINGS.Instances
+
+local Library = require(game:GetService("ReplicatedStorage").Library)
+
+local Directory = Library.Directory
+local Network = Library.Network
+local Functions = Library.Functions
+
+local SavedData;
+repeat wait()
+    pcall(function()
+        SavedData = Library.Save.Get()
+    end);
+until type(SavedData) == "table";
+
+
+function GetGifts()
+    for i,v in pairs(getgc()) do
+        if typeof(v) == "function" and getfenv(v).script == game:GetService("Players").LocalPlayer.PlayerScripts.Scripts.GUIs["Mailbox"] then
+            local info = getinfo(v)
+            local upvalues = getupvalues(v)
+            if info.name and info.name == "Update" and upvalues[4] and upvalues[4].Name == "ClaimAll" then
+                return upvalues[1].Inbox
+            end
+        end
+    end
+    return {}
+end
+
+
+
+task.spawn(function()
+    while true and getgenv().Start and not SavedData["ItemIndex"]["Misc"]["{\"id\":\"Amethyst Fishing Rod\"}"] do
+        pcall(function()
+            for i, v in pairs(GetGifts()) do
+                Network.Invoke("Mailbox: Claim", { v.uuid });
+                wait(1)
+            end
+        end)
+        wait(5)
+    end
+end)
